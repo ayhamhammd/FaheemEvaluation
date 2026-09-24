@@ -285,6 +285,18 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 .tiers span{font-size:12.5px;border:1px solid var(--line);border-radius:8px;padding:3px 9px;background:var(--page);color:var(--muted)}
 .tiers span.on{background:var(--rose);border-color:var(--rose);color:var(--btn-text);font-weight:600}
 .hp-pill s{color:var(--muted);margin-inline-start:6px;font-size:13px}
+.hp-pill small{display:block;font-size:12px;color:var(--muted)}
+.price-card .hp small{color:var(--muted);font-size:14px;align-self:center}
+.tiers::before{content:"خصم الاختبار:";font-size:12.5px;color:var(--muted);align-self:center}
+.rates{margin-top:18px}
+.tbl-scroll{overflow-x:auto;margin-top:12px}
+.rtab{border-collapse:collapse;width:100%;font-size:13.5px;min-width:660px}
+.rtab th,.rtab td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:center;white-space:nowrap}
+.rtab th{background:var(--page);color:var(--muted);font-weight:600;font-size:12.5px}
+.rtab td:first-child,.rtab th:first-child{text-align:start;font-weight:600;color:var(--ink)}
+.rtab .col-on{background:color-mix(in srgb,var(--rose) 12%,transparent);color:var(--rose);font-weight:700}
+.rtab tr.band-on td{background:color-mix(in srgb,var(--saffron) 22%,transparent)}
+.rtab tr.band-on td.col-on{background:var(--rose);color:var(--btn-text)}
 
 /* ---------- assistant ---------- */
 .chat-fab{position:fixed;inset-inline-start:18px;bottom:18px;z-index:75;border:0;border-radius:999px;padding:12px 18px;background:var(--ink-2);color:var(--btn-text);font-weight:600;font-size:14.5px;box-shadow:0 14px 30px -12px rgba(120,55,0,.7);cursor:pointer;display:flex;gap:8px;align-items:center}
@@ -372,14 +384,14 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
     </div>
 
     <div class="price-card">
-      <span class="seal" id="hero-seal">السعر الأساسي للساعة</span>
-      <div class="hp"><b id="hero-hp">٨٣</b><span>ريال سعودي للساعة</span><s id="hero-was" class="hide"></s></div>
-      <p id="hero-note">سعر موحّد لكل المواد والمراحل، ويقل حسب نتيجة اختبار تحديد المستوى بخصم يبدأ من ٥٪ ويصل إلى ٣٥٪.</p>
+      <span class="seal" id="hero-seal">كلما زادت الساعات قلّ سعر الساعة</span>
+      <div class="hp"><small>يبدأ من</small><b id="hero-hp"></b><span>ريال للساعة</span><s id="hero-was" class="hide"></s></div>
+      <p id="hero-note"></p>
       <div class="tiers" id="tiers" aria-label="نسب الخصم حسب نتيجة الاختبار"></div>
       <ul class="ticks">
         <li>اختبر مستوى الطالب واحصل على خصمك</li>
         <li>اختر المرحلة وحدّد احتياج كل مادة</li>
-        <li>اعرف عدد الساعات والتكلفة بعد الخصم فوراً</li>
+        <li>نقرّب ساعاتك لأقرب شريحة ونحسب التكلفة بعد الخصم</li>
       </ul>
       <a class="btn" href="#calc">افتح حاسبة الساعات</a>
     </div>
@@ -542,8 +554,12 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
           <span>المادة</span><span>مدة الحصة (دقيقة)</span><span>الحصص بالأسبوع</span><span>المدة (أشهر)</span><span>عدد الساعات</span><span>سعر الساعة</span><span>التكلفة</span>
         </div>
         <div id="calc-rows"></div>
-        <p class="calc-note">عدد الساعات = مدة الحصة × عدد الحصص في الأسبوع × ٤ أسابيع × عدد الأشهر. اترك المادة فارغة إن لم يحتجها الطالب.</p>
+        <p class="calc-note">عدد الساعات = مدة الحصة × عدد الحصص في الأسبوع × ٤ أسابيع × عدد الأشهر. اترك المادة فارغة إن لم يحتجها الطالب. سعر الساعة يُحدَّد من مجموع ساعات كل المواد، بعد تقريبه لأقرب شريحة في جدول سعر الساعة.</p>
       </div>
+      <details class="rates" open>
+        <summary>جدول سعر الساعة حسب عدد الساعات، قبل الخصم وبعده</summary>
+        <div class="tbl-scroll"><table class="rtab" id="rtab"></table></div>
+      </details>
     </div>
   </div>
 
@@ -709,7 +725,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 
   <div class="faq">
     <h2 class="sec-title" style="margin-top:44px">الأسئلة الشائعة</h2>
-    <details><summary>كم سعر الساعة؟</summary><p>السعر الأساسي للساعة ٨٣ ريالاً لكل المواد والمراحل، ويقل حسب نتيجة اختبار تحديد المستوى.</p></details>
+    <details><summary>كم سعر الساعة؟</summary><p>سعر الساعة يعتمد على مجموع الساعات التي يحتاجها الطالب: كلما زادت الساعات قلّ سعر الساعة، من ١٥٣٫٧٥ ريالاً لـ ٤ ساعات حتى ٨٨٫٣١ ريالاً لـ ٢٠٠ ساعة قبل الخصم. الحاسبة تقرّب مجموع ساعاتك لأقرب شريحة، ثم يُطبَّق خصم اختبار تحديد المستوى.</p></details>
     <details><summary>كيف يتحدد الخصم؟</summary><p>بعدد الإجابات الصحيحة في اختبار تحديد المستوى: ١٠ صحيحة تعني ٣٥٪، وتنخفض النسبة ٥٪ مع كل إجابة ناقصة حتى ٥٪ كحد أدنى. الخصم يُطبَّق على سعر الساعة مباشرة.</p></details>
     <details><summary>هل يمكن إعادة الاختبار؟</summary><p>لا، الاختبار يُجرى مرة واحدة فقط ويُعتمد خصمه، ومدته ٥ دقائق.</p></details>
     <details><summary>كيف تُحسب الساعات في الحاسبة؟</summary><p>مدة الحصة بالدقائق × عدد الحصص في الأسبوع × ٤ أسابيع × عدد الأشهر، لكل مادة على حدة، ثم تُجمع ساعات المواد كلها.</p></details>
@@ -770,7 +786,21 @@ var WHATSAPP = "966500127846"; // رقم واتساب منصة فهيم
 var EXAM_SECONDS = 5 * 60;
 
 /* ============ سعر الساعة ============ */
-var HOUR_PRICE = 83;
+var HOUR_BANDS = [
+  {hours:4,   price:615},
+  {hours:8,   price:984},
+  {hours:12,  price:1329},
+  {hours:15,  price:1636},
+  {hours:20,  price:2153},
+  {hours:25,  price:2537},
+  {hours:30,  price:2953},
+  {hours:35,  price:3323},
+  {hours:50,  price:4615},
+  {hours:75,  price:6830},
+  {hours:100, price:8984},
+  {hours:150, price:13415},
+  {hours:200, price:17661}
+];
 var TIERS = [5,10,15,20,25,30,35];
 var WEEKS_PER_MONTH = 4;
 
@@ -1096,8 +1126,17 @@ var money = function(n){ return AR(Math.round(n).toLocaleString("en-US")) + " ر
 function toast(msg){ var t=$("#toast"); t.textContent=msg; t.classList.add("on"); setTimeout(function(){t.classList.remove("on")},2200); }
 function num(v){ var x = String(v||"").replace(/[٠-٩]/g,function(d){return "٠١٢٣٤٥٦٧٨٩".indexOf(d)}).replace(/[^\d.]/g,""); var n = parseFloat(x); return isFinite(n) && n > 0 ? n : 0; }
 function hoursText(h){ return AR(String(Math.round(h*10)/10).replace(".","٫")); }
-function hourPrice(){ return Math.round(HOUR_PRICE * (1 - state.discount/100) * 100) / 100; }
-function priceText(n){ return AR(n.toLocaleString("en-US", {maximumFractionDigits:2})).replace(".","٫") + " ر.س"; }
+function round2(n){ return Math.round(n * 100) / 100; }
+function bandFor(h){
+  var best = HOUR_BANDS[0];
+  HOUR_BANDS.forEach(function(b){ if(Math.abs(b.hours - h) <= Math.abs(best.hours - h)) best = b; });
+  return best;
+}
+function rateFor(band, d){ return round2(band.price / band.hours * (1 - (d || 0) / 100)); }
+function baseRate(band){ return rateFor(band, 0); }
+function myRate(band){ return rateFor(band, state.discount); }
+function priceText(n){ var f = n % 1 ? 2 : 0; return AR(n.toLocaleString("en-US", {minimumFractionDigits:f, maximumFractionDigits:2})).replace(".","٫") + " ر.س"; }
+function hoursWord(n){ return n <= 10 ? "ساعات" : "ساعة"; }
 function discountFor(c){ return c >= 10 ? 35 : c === 9 ? 30 : c === 8 ? 25 : c === 7 ? 20 : c === 6 ? 15 : c === 5 ? 10 : 5; }
 
 var state = { student:null, level:null, gradeLabel:"", questions:[], answers:[], idx:0, correct:0, discount:0, done:false, deadline:0, timerId:null };
@@ -1117,7 +1156,7 @@ function loadExam(){
 }
 
 /* ============ حاسبة الساعات ============ */
-var calc = { stage:null, rows:[] };
+var calc = { stage:null, rows:[], total:0 };
 
 (function(){
   var html = '<option value="">اختر المرحلة الدراسية</option>';
@@ -1127,16 +1166,29 @@ var calc = { stage:null, rows:[] };
 })();
 
 function renderPrice(){
-  var d = state.discount, hp = hourPrice();
-  $("#hp").innerHTML = priceText(hp) + (d ? '<s>'+priceText(HOUR_PRICE)+'</s>' : "");
-  $("#hero-hp").textContent = AR(String(hp).replace(".","٫"));
-  $("#hero-was").textContent = priceText(HOUR_PRICE);
+  var d = state.discount, low = HOUR_BANDS[HOUR_BANDS.length-1], high = HOUR_BANDS[0];
+  $("#hero-hp").textContent = AR(String(myRate(low)).replace(".","٫"));
+  $("#hero-was").textContent = priceText(baseRate(low));
   $("#hero-was").classList.toggle("hide", !d);
-  $("#hero-seal").textContent = d ? "سعر الساعة بعد خصمك " + AR(d) + "٪" : "السعر الأساسي للساعة";
   $("#hero-note").textContent = d
-    ? "خصمك من اختبار تحديد المستوى مُطبَّق على كل المواد والمراحل."
-    : "سعر موحّد لكل المواد والمراحل، ويقل حسب نتيجة اختبار تحديد المستوى بخصم يبدأ من ٥٪ ويصل إلى ٣٥٪.";
-  $("#tiers").innerHTML = TIERS.map(function(t){ return '<span class="'+(t===d?"on":"")+'">'+AR(t)+'٪ · '+priceText(Math.round(HOUR_PRICE*(1-t/100)*100)/100)+'</span>'; }).join("");
+    ? "خصمك " + AR(d) + "٪ من اختبار تحديد المستوى مُطبَّق على سعر الساعة في كل الشرائح: من " + priceText(myRate(high)) + " لـ " + AR(high.hours) + " ساعات إلى " + priceText(myRate(low)) + " لـ " + AR(low.hours) + " ساعة."
+    : "لكل عدد ساعات سعر ساعة خاص: من " + priceText(baseRate(high)) + " لـ " + AR(high.hours) + " ساعات حتى " + priceText(baseRate(low)) + " لـ " + AR(low.hours) + " ساعة، ثم يُخصم منه خصم اختبار تحديد المستوى.";
+  $("#tiers").innerHTML = TIERS.map(function(t){ return '<span class="'+(t===d?"on":"")+'">'+AR(t)+'٪</span>'; }).join("");
+  renderRateTable();
+  updateCalc();
+}
+
+function renderRateTable(){
+  var d = state.discount, band = calc.total > 0 ? bandFor(calc.total) : null;
+  var head = "<thead><tr><th>عدد الساعات</th><th>قبل الخصم</th>";
+  TIERS.forEach(function(t){ head += '<th class="'+(t===d?"col-on":"")+'">'+(t===d?"خصمك ":"")+AR(t)+'٪</th>'; });
+  var body = "<tbody>";
+  HOUR_BANDS.forEach(function(b){
+    body += '<tr class="'+(b===band?"band-on":"")+'"><td>'+AR(b.hours)+' '+hoursWord(b.hours)+(b===band?" ← احتياجك":"")+'</td><td>'+priceText(baseRate(b))+'</td>';
+    TIERS.forEach(function(t){ body += '<td class="'+(t===d?"col-on":"")+'">'+priceText(rateFor(b,t))+'</td>'; });
+    body += "</tr>";
+  });
+  $("#rtab").innerHTML = head + "</tr></thead>" + body + "</tbody>";
 }
 
 function stageOf(k){ for(var i=0;i<STAGES.length;i++){ if(STAGES[i].k===k) return STAGES[i]; } return null; }
@@ -1158,7 +1210,7 @@ function setStage(k){
       '<label class="cell"><span class="ml">حصص/أسبوع</span><input data-k="per" type="text" inputmode="numeric" placeholder="٠" aria-label="عدد الحصص في الأسبوع لمادة '+r.name+'"></label>'+
       '<label class="cell"><span class="ml">المدة (أشهر)</span><input data-k="months" type="text" inputmode="decimal" placeholder="٠" aria-label="عدد الأشهر لمادة '+r.name+'"></label>'+
       '<span class="cell out"><span class="ml">الساعات</span><b class="dim" data-o="hrs">—</b></span>'+
-      '<span class="cell out"><span class="ml">سعر الساعة</span><b data-o="hp">'+priceText(hourPrice())+'</b></span>'+
+      '<span class="cell out"><span class="ml">سعر الساعة</span><b data-o="hp">—</b></span>'+
       '<span class="cell out"><span class="ml">التكلفة</span><b class="dim" data-o="cost">—</b></span>'+
     '</div>';
   });
@@ -1169,36 +1221,44 @@ function setStage(k){
 function rowHours(r){ return r.min/60 * r.per * WEEKS_PER_MONTH * r.months; }
 
 function updateCalc(){
-  var total = 0, lines = "";
-  Array.prototype.forEach.call(document.querySelectorAll("#calc-rows .crow"), function(el){
+  var total = 0, lines = "", els = document.querySelectorAll("#calc-rows .crow");
+  Array.prototype.forEach.call(els, function(el){ total += rowHours(calc.rows[+el.dataset.i]); });
+  var prevBand = calc.total > 0 ? bandFor(calc.total) : null;
+  calc.total = total;
+  var band = total > 0 ? bandFor(total) : null, rate = band ? myRate(band) : 0, d = state.discount;
+  if(band !== prevBand) renderRateTable();
+
+  $("#hp").innerHTML = band
+    ? priceText(rate) + (d ? '<s>'+priceText(baseRate(band))+'</s>' : "") + '<small>شريحة '+AR(band.hours)+' '+hoursWord(band.hours)+'</small>'
+    : "حسب مجموع الساعات";
+
+  Array.prototype.forEach.call(els, function(el){
     var r = calc.rows[+el.dataset.i], h = rowHours(r);
-    var hb = el.querySelector('[data-o="hrs"]'), cb = el.querySelector('[data-o="cost"]');
+    var hb = el.querySelector('[data-o="hrs"]'), cb = el.querySelector('[data-o="cost"]'), pb = el.querySelector('[data-o="hp"]');
     el.classList.toggle("on", h > 0);
     hb.textContent = h > 0 ? hoursText(h) + " ساعة" : "—";
-    cb.textContent = h > 0 ? money(h * hourPrice()) : "—";
-    el.querySelector('[data-o="hp"]').textContent = priceText(hourPrice());
-    hb.classList.toggle("dim", !(h > 0)); cb.classList.toggle("dim", !(h > 0));
-    if(h > 0){
-      total += h;
-      lines += '<div><span>'+r.name+'</span><span>'+hoursText(h)+' ساعة · '+money(h*hourPrice())+'</span></div>';
-    }
+    cb.textContent = h > 0 ? money(h * rate) : "—";
+    pb.textContent = band ? priceText(rate) : "—";
+    hb.classList.toggle("dim", !(h > 0)); cb.classList.toggle("dim", !(h > 0)); pb.classList.toggle("dim", !band);
+    if(h > 0) lines += '<div><span>'+r.name+'</span><span>'+hoursText(h)+' ساعة · '+money(h*rate)+'</span></div>';
   });
-  var on = total > 0;
-  $("#calc-sum").classList.toggle("on", on);
-  if(!on) return;
+
+  $("#calc-sum").classList.toggle("on", !!band);
+  if(!band) return;
   $("#sum-lines").innerHTML = lines;
   var rows = "";
   function row(k,v,cls){ rows += '<div class="row '+(cls||"")+'"><span>'+k+'</span><span class="v">'+v+'</span></div>'; }
   if(state.student) row("الطالب", state.student.name);
   row("المرحلة الدراسية", calc.stage.name);
   row("إجمالي الساعات", hoursText(total) + " ساعة");
-  row("السعر الأساسي للساعة", priceText(HOUR_PRICE));
-  row("خصم اختبار المستوى", state.discount ? AR(state.discount)+"٪" : "لم يُجرَ الاختبار بعد");
-  if(state.discount){
-    row("سعر الساعة بعد الخصم", priceText(hourPrice()));
-    row("قيمة التوفير", money(total * (HOUR_PRICE - hourPrice())));
+  row("أقرب شريحة لتحديد السعر", AR(band.hours) + " " + hoursWord(band.hours));
+  row("سعر الساعة قبل الخصم", priceText(baseRate(band)));
+  row("خصم اختبار المستوى", d ? AR(d)+"٪" : "لم يُجرَ الاختبار بعد");
+  if(d){
+    row("سعر الساعة بعد الخصم", priceText(rate));
+    row("قيمة التوفير", money(total * (baseRate(band) - rate)));
   }
-  row("التكلفة الإجمالية", money(total * hourPrice()), "total");
+  row("التكلفة الإجمالية", money(total * rate), "total");
   $("#sum-rows").innerHTML = rows;
   $("#wa").href = "https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(calcText());
 }
@@ -1248,10 +1308,12 @@ function calcText(){
   });
   L.push("──────────────");
   L.push("إجمالي الساعات: " + fmt(total) + " ساعة");
-  L.push("السعر الأساسي للساعة: " + HOUR_PRICE + " ر.س");
+  var band = bandFor(total), rate = myRate(band);
+  L.push("أقرب شريحة لتحديد السعر: " + band.hours + " ساعة");
+  L.push("سعر الساعة قبل الخصم: " + baseRate(band) + " ر.س");
   L.push("خصم اختبار المستوى: " + (state.discount ? state.discount + "%" : "بدون خصم"));
-  if(state.discount) L.push("سعر الساعة بعد الخصم: " + hourPrice() + " ر.س");
-  L.push("التكلفة الإجمالية: " + Math.round(total * hourPrice()).toLocaleString("en-US") + " ر.س");
+  if(state.discount) L.push("سعر الساعة بعد الخصم: " + rate + " ر.س");
+  L.push("التكلفة الإجمالية: " + Math.round(total * rate).toLocaleString("en-US") + " ر.س");
   L.push("──────────────");
   L.push("أرغب في الاشتراك وجدولة الحصص.");
   return L.join("\n");
@@ -1397,8 +1459,8 @@ function showResult(timeUp){
   var head = d >= 30 ? "مستوى ممتاز" : d >= 20 ? "مستوى جيد جداً" : d >= 10 ? "مستوى جيد" : "بداية الطريق";
   $("#res-head").textContent = head + "، " + state.student.name.split(" ")[0];
   $("#res-score").textContent = (timeUp ? "انتهى الوقت. " : "") +
-    "إجاباتك الصحيحة " + AR(c) + " من " + AR(state.questions.length) + "، ويقابلها خصم " + AR(d) + "٪ على سعر الساعة: " +
-    priceText(hourPrice()) + " بدلاً من " + priceText(HOUR_PRICE) + ".";
+    "إجاباتك الصحيحة " + AR(c) + " من " + AR(state.questions.length) + "، ويقابلها خصم " + AR(d) + "٪ على سعر الساعة في كل الشرائح. مثلاً ٢٠ ساعة: " +
+    priceText(rateFor(bandFor(20), d)) + " للساعة بدلاً من " + priceText(baseRate(bandFor(20))) + ".";
 
   var by = {};
   state.questions.forEach(function(q,i){
@@ -1497,8 +1559,10 @@ var KB = [
    a:"🎁 <b>هدية التسجيل المبكر</b>: عند اشتراككم بالساعات تُفتح لكم <b>الحقيبة التعليمية كاملة مجاناً</b>. ومن خلالها يختار الطالب الدرس والوقت واليوم المناسب من داخل تطبيق فهيم.", next:["signup","price"]},
   {id:"price", keys:["سعر","اسعار","السعر","كم الساعه","تكلفه","التكلفه","كم يكلف","كم السعر","بكم","فلوس","ريال","قيمه","غالي"],
    a:function(){
-     var t = "💰 <b>السعر الأساسي للساعة "+priceText(HOUR_PRICE)+"</b> لكل المواد والمراحل.<br>وبعد "+TEST_LINK+" يحصل الطالب على <b>خصم من ٥٪ حتى ٣٥٪</b> حسب نتيجته، فيصل سعر الساعة إلى "+priceText(Math.round(HOUR_PRICE*0.65*100)/100)+".";
-     if(state.discount) t += "<br>خصمك الحالي <b>"+AR(state.discount)+"٪</b>، يعني سعر الساعة لك <b>"+priceText(hourPrice())+"</b>.";
+     var high = HOUR_BANDS[0], low = HOUR_BANDS[HOUR_BANDS.length-1];
+     var t = "💰 سعر الساعة يعتمد على <b>مجموع الساعات</b> اللي يحتاجها الطالب: كلما زادت الساعات قلّ سعر الساعة، من <b>"+priceText(baseRate(high))+"</b> لـ "+AR(high.hours)+" ساعات إلى <b>"+priceText(baseRate(low))+"</b> لـ "+AR(low.hours)+" ساعة قبل الخصم.<br>وبعد "+TEST_LINK+" يحصل الطالب على <b>خصم من ٥٪ حتى ٣٥٪</b> حسب نتيجته.";
+     if(state.discount) t += "<br>خصمك الحالي <b>"+AR(state.discount)+"٪</b>.";
+     if(calc.total > 0){ var b = bandFor(calc.total); t += "<br>حسب احتياجك في الحاسبة ("+hoursText(calc.total)+" "+hoursWord(calc.total)+"، أقرب شريحة "+AR(b.hours)+" "+hoursWord(b.hours)+") سعر الساعة لك <b>"+priceText(myRate(b))+"</b>."; }
      return t + "<br>احسب التكلفة الكاملة في "+CALC_LINK+".";
    }, next:["discount","system"]},
   {id:"discount", keys:["خصم","خصومات","تخفيض","عرض","عروض","كوبون","اختبار","تقييم","تحديد المستوى","اختبار المستوى"],

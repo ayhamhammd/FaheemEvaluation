@@ -50,11 +50,14 @@ there is no server-side code.
 Values live at the top of the `<script>` block in `index.html`:
 
 - `WHATSAPP` — WhatsApp number that receives order summaries (currently `966500127846`).
-- `HOUR_PRICE` — the base price per hour: **83 SAR** (the average per-hour price of the 13
-  former packages under all 7 former discount tiers, 83.08). The packages were removed.
-- `TIERS` — the quiz discount on the hour price: 10 correct → 35%, 9 → 30%, 8 → 25%,
-  7 → 20%, 6 → 15%, 5 → 10%, below that → 5%. The calculator, hero card and WhatsApp
-  summary all use the discounted price once the quiz is done.
+- `HOUR_BANDS` — the former packages' hours and prices, used only to derive a price **per
+  hour** for each band (615 ÷ 4 = 153.75 … 17661 ÷ 200 = 88.31). Package totals are never
+  shown. The calculator adds up the hours of every subject, rounds that total to the
+  **nearest** band (a tie goes to the larger band, which is cheaper), and prices every hour
+  at that band's rate. Below 4 hours uses the 4-hour rate, above 200 the 200-hour rate.
+- `TIERS` — the quiz discount on the band's hour price: 10 correct → 35%, 9 → 30%, 8 → 25%,
+  7 → 20%, 6 → 15%, 5 → 10%, below that → 5%. The calculator shows a table of every band's
+  hour price before and after each tier, highlighting the visitor's band and discount.
 - `EXAM_SECONDS` — 5 minutes. The quiz can be taken **once**: progress and the result are
   kept in `localStorage` (`faheem-exam`), so a reload resumes the exam against the same
   deadline, or shows the saved result. Clearing site data is the only way round it.
