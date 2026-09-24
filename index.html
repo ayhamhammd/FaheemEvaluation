@@ -255,8 +255,10 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 .vframe.tall video{aspect-ratio:9/16;object-fit:cover}
 .vtext h3{font-family:"Baloo Bhaijaan 2","IBM Plex Sans Arabic",cursive;font-size:clamp(22px,3vw,28px);color:var(--ink);line-height:1.5}
 .vtext p{color:var(--muted);margin-top:10px}
-.vid-row{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:18px;margin-top:18px;align-items:stretch}
-@media(max-width:860px){.vid-row{grid-template-columns:1fr 1fr}.vid-row .vcap-box{grid-column:1/-1}}
+.vid-row{display:grid;grid-template-columns:repeat(3,1fr) 1.3fr;gap:18px;margin-top:18px;align-items:stretch}
+@media(max-width:980px){.vid-row{grid-template-columns:repeat(3,1fr)}.vid-row .vcap-box{grid-column:1/-1}}
+@media(max-width:600px){.vid-row{grid-template-columns:1fr 1fr}.vid-row .vcard.lead{grid-column:1/-1}.vcard.lead .vframe{max-width:320px;margin:0 auto}}
+.story-wrap{padding-bottom:56px}
 .vcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px}
 .vcard .cap{font-size:13.5px;color:var(--muted);padding:10px 4px 2px}
 .vcap-box{background:linear-gradient(160deg,color-mix(in srgb,var(--brand) 16%,var(--card)),var(--card));border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;justify-content:center;gap:12px}
@@ -418,6 +420,26 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
       <div class="n">٣</div>
       <h3>أرسل طلبك عبر واتساب</h3>
       <p>تُحسب الساعات والتكلفة تلقائياً، ويصل ملخص طلبك لفريق فهيم بضغطة واحدة.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wrap story-wrap" id="story">
+  <div class="vid-feature">
+    <div class="vframe">
+      <video controls playsinline preload="none" poster="assets/faheem-story.jpg">
+        <source src="assets/faheem-story.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="vtext">
+      <span class="seal">قصة فهيم</span>
+      <h3>تعرّف على منصة فهيم</h3>
+      <p>بدأت فهيم من تحدٍّ حقيقي تعيشه الأسر: إيجاد معلم كفء وموثوق. فبنينا منصة تربط الطلاب بمعلمين خصوصيين متميزين، من المرحلة الابتدائية حتى الجامعة.</p>
+      <ul class="ticks">
+        <li>معلم مختص لكل مادة</li>
+        <li>حصص فردية مباشرة من داخل تطبيق فهيم</li>
+        <li>تسجيل كل حصة، ومتابعة ولي الأمر من جواله</li>
+      </ul>
     </div>
   </div>
 </div>
@@ -606,6 +628,14 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   </div>
 
   <div class="vid-row">
+    <div class="vcard lead">
+      <div class="vframe tall">
+        <video controls playsinline preload="none" poster="assets/mom-story.jpg">
+          <source src="assets/mom-story.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="cap">رسالة من إحدى الأمهات عن تجربة أبنائها مع فهيم.</p>
+    </div>
     <div class="vcard">
       <div class="vframe tall">
         <video controls playsinline preload="none" poster="assets/lesson-home-1.jpg">
@@ -1559,7 +1589,7 @@ var KB = [
   {id:"thanks", w:.3, keys:["شكرا","مشكور","يعطيك العافيه","تسلم","جزاك","الله يسعدك"],
    a:"العفو، في خدمتك دائماً 🌷 إذا عندك أي سؤال ثاني أنا موجود.", next:["signup","contact"]},
   {id:"about", keys:["من انتم","مين انتم","عن المنصه","ايش فهيم","وش فهيم","شو فهيم","ما هي فهيم","عرفني","تعريف","فكره المنصه","ايش تقدمون","وش تقدمون","خدماتكم"],
-   a:"منصة فهيم التعليمية شريكك التعليمي لتفوّق أبنائك 📚<ul><li>نغطي كل المراحل من <b>الروضة حتى الجامعة</b>.</li><li>المنهج السعودي كاملاً، والمناهج الدولية: أمريكي وبريطاني وكندي.</li><li>تأسيس شامل وتدريب على نافس وموهبة والاختبارات المركزية والقدرات والتحصيلي.</li><li>حصص أونلاين فردية ومباشرة من داخل تطبيق فهيم، ومعلم مختص لكل مادة.</li></ul>", next:["teachers","system","price"]},
+   a:"منصة فهيم التعليمية شريكك التعليمي لتفوّق أبنائك 📚<ul><li>نغطي كل المراحل من <b>الروضة حتى الجامعة</b>.</li><li>المنهج السعودي كاملاً، والمناهج الدولية: أمريكي وبريطاني وكندي.</li><li>تأسيس شامل وتدريب على نافس وموهبة والاختبارات المركزية والقدرات والتحصيلي.</li><li>حصص أونلاين فردية ومباشرة من داخل تطبيق فهيم، ومعلم مختص لكل مادة.</li></ul>🎬 <a href=\"#story\" data-close>شاهد فيديو قصة فهيم</a>", next:["teachers","system","price"]},
   {id:"stages", keys:["مرحله","مراحل","روضه","جامعه","جامعي","ابتدائي","متوسط","ثانوي","الصف","تمهيدي","كي جي","kg","عمر"],
    a:"نخدم كل المراحل الدراسية من <b>الروضة وحتى الجامعة</b>: الروضة، الابتدائي، المتوسط، الثانوي، والجامعة. وتقدر تختار مرحلة ابنك في "+CALC_LINK+" وتظهر لك كل موادها.", next:["curricula","subjects","price"]},
   {id:"curricula", keys:["منهج","مناهج","دولي","انترناشونال","انترناشونل","international","امريكي","بريطاني","كندي","سعودي","igcse","مدارس عالميه"],

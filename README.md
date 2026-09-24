@@ -13,7 +13,7 @@ quiz, parent testimonials (screenshots and videos), credentials and contact sect
 | File | Purpose |
 | --- | --- |
 | `index.html` | The whole site (originally `fahim.html`) — HTML, CSS, JS; logo, certificate and partners images inline as base64. |
-| `assets/` | Testimonial screenshots (`feedback-*.jpg`, phone numbers cropped out), the award photo, and the three videos with their poster frames. |
+| `assets/` | Testimonial screenshots (`feedback-*.jpg`, phone numbers cropped out), the award photo, the founder's story video (`faheem-story`, its own section after the steps), and four testimonial videos with their poster frames. |
 | `render.yaml` | Render Blueprint describing the static site. |
 
 ## Local preview
