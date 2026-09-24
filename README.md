@@ -61,6 +61,10 @@ Values live at the top of the `<script>` block in `index.html`:
 - `EXAM_SECONDS` — 5 minutes. The quiz can be taken **once**: progress and the result are
   kept in `localStorage` (`faheem-exam`), so a reload resumes the exam against the same
   deadline, or shows the saved result. Clearing site data is the only way round it.
+- **Prices stay hidden until the quiz is done.** Before that the calculator section shows a
+  lock card pointing to the quiz, the hero card shows only the discount range, and the
+  assistant and FAQ explain the rule without quoting a figure. `renderPrice()` flips all of
+  it on `state.done`, and the saved result keeps it open across reloads.
 - `WEEKS_PER_MONTH` — 4. Hours per subject = minutes ÷ 60 × sessions per week × 4 × months.
 - `STAGES` — each school stage and its subjects, shown in the calculator.
 - `BANK` — the quiz question bank, grouped by track (`p1`, `p2`, `m`, `h`, `f`, `q`, `t`).

@@ -289,6 +289,10 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 .price-card .hp small{color:var(--muted);font-size:14px;align-self:center}
 .tiers::before{content:"خصم الاختبار:";font-size:12.5px;color:var(--muted);align-self:center}
 .rates{margin-top:18px}
+.calc-lock{text-align:center;background:var(--card);border:1.5px dashed color-mix(in srgb,var(--brand) 55%,var(--line));border-radius:20px;padding:34px 22px}
+.calc-lock .lock-ic{width:58px;height:58px;margin:0 auto 12px;border-radius:18px;display:grid;place-items:center;font-size:28px;background:color-mix(in srgb,var(--brand) 14%,var(--page))}
+.calc-lock h3{font-family:"Baloo Bhaijaan 2","IBM Plex Sans Arabic",cursive;font-size:clamp(21px,3vw,26px);color:var(--ink)}
+.calc-lock p{color:var(--muted);max-width:56ch;margin:10px auto 20px}
 .tbl-scroll{overflow-x:auto;margin-top:12px}
 .rtab{border-collapse:collapse;width:100%;font-size:13.5px;min-width:660px}
 .rtab th,.rtab td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:center;white-space:nowrap}
@@ -360,7 +364,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
       <a class="nl" href="#reviews">آراء الأهالي</a>
       <a class="nl" href="#trust">اعتماداتنا</a>
       <a class="nl" href="#contact">تواصل معنا</a>
-      <a class="btn" href="#calc">احسب ساعاتك</a>
+      <a class="btn" href="#test" data-go>ابدأ الاختبار</a>
     </nav>
   </div>
 </header>
@@ -371,10 +375,10 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   <section class="hero">
     <div>
       <h1>علّم أبناءك بقدر احتياجهم، وادفع بالساعة.</h1>
-      <p class="lead">احسب عدد الساعات التي يحتاجها ابنك أو ابنتك في كل مادة من مواد مرحلته الدراسية، واعرف التكلفة فوراً. ونتيجة اختبار تحديد المستوى تحدد خصمك على سعر الساعة، من ٥٪ حتى ٣٥٪.</p>
+      <p class="lead">اختبر مستوى ابنك أو ابنتك في ٥ دقائق واحصل على خصم يصل إلى ٣٥٪ على سعر الساعة، ثم احسب عدد الساعات التي يحتاجها في كل مادة واعرف التكلفة فوراً.</p>
       <div class="cta">
-        <a class="btn" href="#calc">احسب ساعاتك الآن</a>
-        <a class="btn ghost" href="#test">اختبر مستواك واحصل على خصمك</a>
+        <a class="btn" href="#test" data-go>ابدأ اختبار المستوى</a>
+        <a class="btn ghost" href="#reviews">شاهد آراء الأهالي</a>
       </div>
       <div class="trust">
         <span><b>التأسيس</b> وكل المراحل والقدرات والتحصيلي</span>
@@ -385,7 +389,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 
     <div class="price-card">
       <span class="seal" id="hero-seal">كلما زادت الساعات قلّ سعر الساعة</span>
-      <div class="hp"><small>يبدأ من</small><b id="hero-hp"></b><span>ريال للساعة</span><s id="hero-was" class="hide"></s></div>
+      <div class="hp"><small id="hero-pre">يبدأ من</small><b id="hero-hp"></b><span id="hero-unit">ريال للساعة</span><s id="hero-was" class="hide"></s></div>
       <p id="hero-note"></p>
       <div class="tiers" id="tiers" aria-label="نسب الخصم حسب نتيجة الاختبار"></div>
       <ul class="ticks">
@@ -393,7 +397,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
         <li>اختر المرحلة وحدّد احتياج كل مادة</li>
         <li>نقرّب ساعاتك لأقرب شريحة ونحسب التكلفة بعد الخصم</li>
       </ul>
-      <a class="btn" href="#calc">افتح حاسبة الساعات</a>
+      <a class="btn" href="#test" data-go>ابدأ اختبار المستوى</a>
     </div>
   </section>
 </div>
@@ -402,13 +406,13 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   <div class="steps">
     <div class="step">
       <div class="n">١</div>
-      <h3>اختر المرحلة الدراسية</h3>
-      <p>تظهر لك جميع مواد المرحلة، من التأسيس حتى الثانوية، إضافة إلى القدرات والتحصيلي.</p>
+      <h3>اختبر مستوى الطالب</h3>
+      <p>١٠ أسئلة في ٥ دقائق من منهج مرحلته، ونتيجته تحدد خصمه على سعر الساعة من ٥٪ حتى ٣٥٪.</p>
     </div>
     <div class="step">
       <div class="n">٢</div>
-      <h3>عبّئ احتياج كل مادة</h3>
-      <p>مدة الحصة بالدقائق، وعدد الحصص في الأسبوع، وعدد الأشهر، للمواد التي يحتاجها الطالب فقط.</p>
+      <h3>احسب الساعات لكل مادة</h3>
+      <p>تُفتح لك حاسبة الساعات بعد الاختبار: مدة الحصة، وعدد الحصص في الأسبوع، وعدد الأشهر، للمواد التي يحتاجها الطالب فقط.</p>
     </div>
     <div class="step">
       <div class="n">٣</div>
@@ -537,6 +541,14 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   <h2 class="sec-title">حاسبة الساعات</h2>
   <p class="sec-sub">اختر المرحلة الدراسية فتظهر لك جميع موادها. عبّئ احتياج الطالب في المواد التي يحتاجها فقط، وتُحسب الساعات والتكلفة تلقائياً.</p>
 
+  <div class="calc-lock" id="calc-lock">
+    <div class="lock-ic" aria-hidden="true">🔒</div>
+    <h3>الحاسبة والأسعار تُفتح بعد اختبار تحديد المستوى</h3>
+    <p>سعر الساعة يعتمد على خصم الطالب من الاختبار وعلى عدد الساعات التي يحتاجها، لذلك تُفتح الحاسبة وتظهر الأسعار مباشرة بعد إنهاء الاختبار. الاختبار مجاني: ١٠ أسئلة في ٥ دقائق.</p>
+    <a class="btn" href="#test">ابدأ الاختبار الآن</a>
+  </div>
+
+  <div id="calc-open" class="hide">
   <div class="panel">
     <div class="panel-head">
       <div class="calc-head">
@@ -572,6 +584,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
       <button class="btn ghost" id="copy">نسخ الملخص</button>
       <button class="btn ghost" id="reset">مسح الجدول</button>
     </div>
+  </div>
   </div>
 </div>
 
@@ -725,7 +738,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 
   <div class="faq">
     <h2 class="sec-title" style="margin-top:44px">الأسئلة الشائعة</h2>
-    <details><summary>كم سعر الساعة؟</summary><p>سعر الساعة يعتمد على مجموع الساعات التي يحتاجها الطالب: كلما زادت الساعات قلّ سعر الساعة، من ١٥٣٫٧٥ ريالاً لـ ٤ ساعات حتى ٨٨٫٣١ ريالاً لـ ٢٠٠ ساعة قبل الخصم. الحاسبة تقرّب مجموع ساعاتك لأقرب شريحة، ثم يُطبَّق خصم اختبار تحديد المستوى.</p></details>
+    <details><summary>كم سعر الساعة؟</summary><p>سعر الساعة يعتمد على مجموع الساعات التي يحتاجها الطالب، فكلما زادت الساعات قلّ سعر الساعة، ثم يُطبَّق عليه خصم اختبار تحديد المستوى. لذلك تظهر الأسعار وتُفتح حاسبة الساعات مباشرة بعد إكمال الاختبار.</p></details>
     <details><summary>كيف يتحدد الخصم؟</summary><p>بعدد الإجابات الصحيحة في اختبار تحديد المستوى: ١٠ صحيحة تعني ٣٥٪، وتنخفض النسبة ٥٪ مع كل إجابة ناقصة حتى ٥٪ كحد أدنى. الخصم يُطبَّق على سعر الساعة مباشرة.</p></details>
     <details><summary>هل يمكن إعادة الاختبار؟</summary><p>لا، الاختبار يُجرى مرة واحدة فقط ويُعتمد خصمه، ومدته ٥ دقائق.</p></details>
     <details><summary>كيف تُحسب الساعات في الحاسبة؟</summary><p>مدة الحصة بالدقائق × عدد الحصص في الأسبوع × ٤ أسابيع × عدد الأشهر، لكل مادة على حدة، ثم تُجمع ساعات المواد كلها.</p></details>
@@ -1167,13 +1180,31 @@ var calc = { stage:null, rows:[], total:0 };
 
 function renderPrice(){
   var d = state.discount, low = HOUR_BANDS[HOUR_BANDS.length-1], high = HOUR_BANDS[0];
+  $("#calc-lock").classList.toggle("hide", state.done);
+  $("#calc-open").classList.toggle("hide", !state.done);
+  Array.prototype.forEach.call(document.querySelectorAll("[data-go]"), function(a){
+    a.href = state.done ? "#calc" : "#test";
+    a.textContent = state.done ? (a.closest("nav") ? "احسب ساعاتك" : "افتح حاسبة الساعات") : (a.closest("nav") ? "ابدأ الاختبار" : "ابدأ اختبار المستوى");
+  });
+  $("#tiers").innerHTML = TIERS.map(function(t){ return '<span class="'+(t===d?"on":"")+'">'+AR(t)+'٪</span>'; }).join("");
+  if(!state.done){
+    $("#hero-seal").textContent = "الأسعار تظهر بعد اختبار المستوى";
+    $("#hero-pre").textContent = "خصم يصل إلى";
+    $("#hero-hp").textContent = "٣٥٪";
+    $("#hero-unit").textContent = "على سعر الساعة";
+    $("#hero-was").classList.add("hide");
+    $("#hero-note").textContent = "سعر الساعة يعتمد على خصم الطالب من الاختبار وعلى عدد الساعات التي يحتاجها، لذلك تظهر الأسعار وتُفتح حاسبة الساعات مباشرة بعد إكمال الاختبار.";
+    return;
+  }
+  $("#hero-seal").textContent = "كلما زادت الساعات قلّ سعر الساعة";
+  $("#hero-pre").textContent = "يبدأ من";
+  $("#hero-unit").textContent = "ريال للساعة";
   $("#hero-hp").textContent = AR(String(myRate(low)).replace(".","٫"));
   $("#hero-was").textContent = priceText(baseRate(low));
   $("#hero-was").classList.toggle("hide", !d);
   $("#hero-note").textContent = d
     ? "خصمك " + AR(d) + "٪ من اختبار تحديد المستوى مُطبَّق على سعر الساعة في كل الشرائح: من " + priceText(myRate(high)) + " لـ " + AR(high.hours) + " ساعات إلى " + priceText(myRate(low)) + " لـ " + AR(low.hours) + " ساعة."
-    : "لكل عدد ساعات سعر ساعة خاص: من " + priceText(baseRate(high)) + " لـ " + AR(high.hours) + " ساعات حتى " + priceText(baseRate(low)) + " لـ " + AR(low.hours) + " ساعة، ثم يُخصم منه خصم اختبار تحديد المستوى.";
-  $("#tiers").innerHTML = TIERS.map(function(t){ return '<span class="'+(t===d?"on":"")+'">'+AR(t)+'٪</span>'; }).join("");
+    : "لكل عدد ساعات سعر ساعة خاص: من " + priceText(baseRate(high)) + " لـ " + AR(high.hours) + " ساعات حتى " + priceText(baseRate(low)) + " لـ " + AR(low.hours) + " ساعة.";
   renderRateTable();
   updateCalc();
 }
@@ -1559,6 +1590,7 @@ var KB = [
    a:"🎁 <b>هدية التسجيل المبكر</b>: عند اشتراككم بالساعات تُفتح لكم <b>الحقيبة التعليمية كاملة مجاناً</b>. ومن خلالها يختار الطالب الدرس والوقت واليوم المناسب من داخل تطبيق فهيم.", next:["signup","price"]},
   {id:"price", keys:["سعر","اسعار","السعر","كم الساعه","تكلفه","التكلفه","كم يكلف","كم السعر","بكم","فلوس","ريال","قيمه","غالي"],
    a:function(){
+     if(!state.done) return "💰 سعر الساعة يعتمد على أمرين: <b>مجموع الساعات</b> اللي يحتاجها الطالب (كلما زادت الساعات قلّ سعر الساعة)، و<b>خصمه من اختبار تحديد المستوى</b> من ٥٪ حتى ٣٥٪.<br>لذلك تظهر الأسعار وتُفتح حاسبة الساعات <b>مباشرة بعد إكمال الاختبار</b>: ١٠ أسئلة في ٥ دقائق. ابدأ من هنا: "+TEST_LINK+".";
      var high = HOUR_BANDS[0], low = HOUR_BANDS[HOUR_BANDS.length-1];
      var t = "💰 سعر الساعة يعتمد على <b>مجموع الساعات</b> اللي يحتاجها الطالب: كلما زادت الساعات قلّ سعر الساعة، من <b>"+priceText(baseRate(high))+"</b> لـ "+AR(high.hours)+" ساعات إلى <b>"+priceText(baseRate(low))+"</b> لـ "+AR(low.hours)+" ساعة قبل الخصم.<br>وبعد "+TEST_LINK+" يحصل الطالب على <b>خصم من ٥٪ حتى ٣٥٪</b> حسب نتيجته.";
      if(state.discount) t += "<br>خصمك الحالي <b>"+AR(state.discount)+"٪</b>.";
@@ -1572,7 +1604,11 @@ var KB = [
      return t;
    }, next:["price","signup"]},
   {id:"calc", keys:["احسب","حاسبه","كم ساعه","كم احتاج","عدد الساعات","كم ساعات"],
-   a:"استخدم "+CALC_LINK+": اختر المرحلة، وعبّئ لكل مادة مدة الحصة وعدد الحصص بالأسبوع وعدد الأشهر، وتطلع لك الساعات والتكلفة بعد خصمك فوراً.", next:["price","signup"]},
+   a:function(){
+     return state.done
+       ? "استخدم "+CALC_LINK+": اختر المرحلة، وعبّئ لكل مادة مدة الحصة وعدد الحصص بالأسبوع وعدد الأشهر، وتطلع لك الساعات والتكلفة بعد خصمك فوراً."
+       : "حاسبة الساعات تُفتح بعد "+TEST_LINK+" (١٠ أسئلة في ٥ دقائق). بعدها تختار المرحلة وتعبّئ لكل مادة مدة الحصة وعدد الحصص بالأسبوع وعدد الأشهر، وتطلع لك الساعات والتكلفة بعد خصمك.";
+   }, next:["price","signup"]},
   {id:"signup", keys:["اشترك","اشتراك","سجل","التسجيل","احجز","حجز","ابدا","ابغى ابدا","كيف ابدا","ودي اسجل","اسجل"],
    a:"سهلة ✅<ul><li>سوِّ "+TEST_LINK+" واحصل على خصمك.</li><li>عبّئ "+CALC_LINK+" لمواد ابنك.</li><li>اضغط «إرسال الطلب عبر واتساب» ويتواصل معك الفريق لإتمام الاشتراك وجدولة الحصص.</li></ul>", next:["gift","contact"]},
   {id:"contact", keys:["تواصل","رقمكم","رقم","واتس","واتساب","اتصال","اتصل","هاتف","خدمه العملاء","الدعم","دوام","موظف","شخص"],
