@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>منصة فهيم — اختبر مستواك واكسب خصمك</title>
+<title>منصة فهيم — حاسبة الساعات التعليمية</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -24,6 +24,7 @@
   --ok:#0E7C5A;
   --shadow:0 18px 40px -28px rgba(120,55,0,.6);
   --r:14px;
+  --sa:#006C35;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -82,22 +83,16 @@ nav a:hover{color:var(--ink)}
 .trust{margin-top:26px;display:flex;gap:26px;flex-wrap:wrap;color:var(--muted);font-size:14px}
 .trust b{color:var(--text);font-weight:600}
 
-/* ladder */
-.ladder{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px 22px 18px;box-shadow:var(--shadow)}
-.ladder h3{font-size:15px;color:var(--muted);font-weight:500;margin-bottom:6px}
-.ladder .rows{display:flex;flex-direction:column;gap:9px;margin-top:14px}
-.rung{display:grid;grid-template-columns:52px 1fr;align-items:center;gap:12px}
-.rung span{font-weight:600;font-size:14px;color:var(--text)}
-.rung i{
-  display:block;height:22px;border-radius:0 7px 7px 0;
-  background:linear-gradient(90deg,var(--brand),color-mix(in srgb,var(--brand) 35%,var(--page)));
-  transform-origin:right center;animation:grow .6s cubic-bezier(.2,.8,.3,1) both;
-}
-.rung:last-child i{background:linear-gradient(90deg,var(--rose),var(--saffron))}
-.rung:last-child span{color:var(--rose)}
-@keyframes grow{from{transform:scaleX(.04);opacity:0}to{transform:scaleX(1);opacity:1}}
-@media(prefers-reduced-motion:reduce){.rung i{animation:none}}
-.ladder .note{margin-top:14px;font-size:13px;color:var(--muted);border-top:1px dashed var(--line);padding-top:12px}
+/* hour price card */
+.price-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 24px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.price-card::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:linear-gradient(90deg,var(--sa),var(--brand))}
+.price-card .hp{display:flex;align-items:baseline;gap:10px;margin:6px 0 10px}
+.price-card .hp b{font-family:"Baloo Bhaijaan 2","IBM Plex Sans Arabic",cursive;font-size:64px;line-height:1;color:var(--rose)}
+.price-card .hp span{color:var(--muted);font-size:15px}
+.price-card p{color:var(--muted);font-size:14.5px}
+.ticks{list-style:none;padding:0;margin:16px 0 20px;display:grid;gap:8px}
+.ticks li{display:flex;gap:10px;align-items:center;font-size:14.5px}
+.ticks li::before{content:"✓";width:22px;height:22px;flex:none;border-radius:7px;display:grid;place-items:center;background:color-mix(in srgb,var(--ok) 14%,transparent);color:var(--ok);font-weight:700;font-size:13px}
 @media(max-width:900px){.hero{grid-template-columns:1fr;gap:34px;padding:40px 0}}
 
 /* ---------- steps ---------- */
@@ -171,26 +166,6 @@ input:focus,select:focus{border-color:var(--ink-2);outline:none}
 .chip{font-size:13px;border:1px solid var(--line);border-radius:9px;padding:5px 11px;background:var(--page);color:var(--muted)}
 .chip b{color:var(--text)}
 
-/* packages */
-.pk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-@media(max-width:980px){.pk-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:740px){.pk-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:460px){.pk-grid{grid-template-columns:1fr}}
-.pk{
-  background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;
-  display:flex;flex-direction:column;gap:6px;cursor:pointer;text-align:start;
-}
-.pk:hover{border-color:var(--ink-2)}
-.pk[aria-pressed="true"]{border-color:var(--rose);box-shadow:inset 0 0 0 1.5px var(--rose)}
-.pk .name{font-weight:600;color:var(--ink);font-size:17px}
-.pk .hrs{font-size:13px;color:var(--muted)}
-.pk .base{font-size:14px;color:var(--muted)}
-.pk .base.off{text-decoration:line-through}
-.pk .final{font-size:24px;font-weight:700;color:var(--text);line-height:1.2}
-.pk .final small{font-size:13px;font-weight:500;color:var(--muted)}
-.pk .save{font-size:12.5px;color:var(--ok);font-weight:600}
-.pk .ph{font-size:12.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px;margin-top:auto}
-
 /* summary */
 .summary{margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:none}
 .summary.on{display:block}
@@ -201,15 +176,6 @@ input:focus,select:focus{border-color:var(--ink-2);outline:none}
 .row.total .v{font-size:22px;color:var(--rose)}
 .actions{display:flex;gap:10px;flex-wrap:wrap}
 
-/* table */
-details{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;margin-top:22px}
-summary{cursor:pointer;font-weight:600;color:var(--ink)}
-.tbl-scroll{overflow-x:auto;margin-top:16px}
-table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:760px}
-th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:center;white-space:nowrap}
-th{background:var(--page);font-weight:600;color:var(--muted);font-size:12.5px}
-td:first-child,th:first-child{text-align:start;font-weight:600;color:var(--ink)}
-tbody tr:hover td{background:color-mix(in srgb,var(--ink-2) 6%,transparent)}
 
 
 .trust-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;align-items:start}
@@ -250,6 +216,89 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   opacity:0;pointer-events:none;transition:opacity .25s ease;
 }
 .toast.on{opacity:1}
+
+/* ---------- calculator ---------- */
+.calc-head{display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap;width:100%}
+.calc-head .field{flex:1 1 280px}
+.hp-pill{background:color-mix(in srgb,var(--brand) 12%,var(--page));border:1px solid color-mix(in srgb,var(--brand) 40%,transparent);border-radius:12px;padding:10px 16px;font-size:14px;color:var(--ink)}
+.hp-pill b{font-size:18px;margin-inline-start:4px}
+.calc-empty{border:1.5px dashed var(--line);border-radius:14px;padding:34px 18px;text-align:center;color:var(--muted)}
+.crow{display:grid;grid-template-columns:1.5fr 1.1fr 1fr 1fr .9fr .9fr 1fr;gap:10px;align-items:center;padding:10px 12px;border-radius:12px;border:1px solid transparent}
+.crow + .crow{margin-top:6px}
+.chead{font-size:12.5px;color:var(--muted);font-weight:600;padding-top:0;padding-bottom:4px}
+.crow:not(.chead){background:var(--page);border-color:var(--line)}
+.crow.on{border-color:var(--ink-2);background:color-mix(in srgb,var(--ink-2) 7%,var(--page))}
+.cname{font-weight:600;color:var(--ink)}
+.cell{display:block;margin:0;font-weight:400}
+.cell .ml{display:none}
+.crow input,.crow select{padding:9px 10px;font-size:15px;background:var(--card);text-align:center}
+.cell.out b{font-size:15.5px;white-space:nowrap}
+@media(max-width:420px){.cell.out b{font-size:13.5px}}
+.cell.out b.dim{color:var(--muted);font-weight:400}
+.calc-note{margin-top:14px;color:var(--muted);font-size:13.5px}
+@media(max-width:820px){
+  .chead{display:none}
+  .crow{grid-template-columns:repeat(3,1fr);padding:14px;gap:8px;align-items:end}
+  .panel-body{padding:18px 14px}
+  .cname{grid-column:1/-1;font-size:16.5px}
+  .cell .ml{display:block;font-size:11.5px;color:var(--muted);margin-bottom:4px;white-space:nowrap}
+  .cell.out{background:var(--card);border-radius:10px;padding:8px 10px;border:1px solid var(--line)}
+}
+.sum-lines{display:grid;gap:6px;margin-top:12px;font-size:14px;color:var(--muted)}
+.sum-lines div{display:flex;justify-content:space-between;gap:10px}
+
+/* ---------- reviews ---------- */
+.vid-feature{display:grid;grid-template-columns:1.35fr 1fr;gap:26px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+@media(max-width:860px){.vid-feature{grid-template-columns:1fr}}
+.vframe{border-radius:14px;overflow:hidden;background:#000;position:relative}
+.vframe video{display:block;width:100%;height:auto;background:#000}
+.vframe.tall video{aspect-ratio:9/16;object-fit:cover}
+.vtext h3{font-family:"Baloo Bhaijaan 2","IBM Plex Sans Arabic",cursive;font-size:clamp(22px,3vw,28px);color:var(--ink);line-height:1.5}
+.vtext p{color:var(--muted);margin-top:10px}
+.vid-row{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:18px;margin-top:18px;align-items:stretch}
+@media(max-width:860px){.vid-row{grid-template-columns:1fr 1fr}.vid-row .vcap-box{grid-column:1/-1}}
+.vcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px}
+.vcard .cap{font-size:13.5px;color:var(--muted);padding:10px 4px 2px}
+.vcap-box{background:linear-gradient(160deg,color-mix(in srgb,var(--brand) 16%,var(--card)),var(--card));border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;justify-content:center;gap:12px}
+.vcap-box h3{font-size:20px;color:var(--ink)}
+.vcap-box p{color:var(--muted);font-size:14.5px}
+.big-stat{font-family:"Baloo Bhaijaan 2","IBM Plex Sans Arabic",cursive;font-size:42px;color:var(--rose);line-height:1.1}
+.quotes{columns:3 300px;column-gap:18px;margin-top:30px}
+.qcard{break-inside:avoid;margin:0 0 18px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px 14px;box-shadow:0 10px 30px -26px rgba(120,55,0,.7)}
+.qcard .stars{color:var(--saffron);letter-spacing:2px;font-size:15px}
+.qcard blockquote{margin:6px 0 4px;font-size:17px;font-weight:600;color:var(--text);line-height:1.7}
+.qcard blockquote::before{content:"❝";color:var(--brand);font-size:26px;line-height:0;vertical-align:-8px;margin-inline-end:6px}
+.qcard figcaption{color:var(--muted);font-size:13.5px}
+.shot-btn{display:block;width:100%;margin-top:12px;padding:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--page);cursor:zoom-in;position:relative}
+.shot-btn img{display:block;width:100%;height:auto;max-height:340px;object-fit:cover;object-position:top}
+.shot-btn::after{content:"اضغط للتكبير";position:absolute;inset:auto 8px 8px auto;background:rgba(20,10,2,.72);color:#fff;font-size:11.5px;padding:3px 9px;border-radius:99px}
+
+/* award */
+.award{display:grid;grid-template-columns:220px 1fr;gap:22px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:20px}
+@media(max-width:620px){.award{grid-template-columns:1fr}}
+.award img{width:100%;height:auto;display:block;border-radius:10px;cursor:zoom-in}
+.award h3{font-family:"Baloo Bhaijaan 2","IBM Plex Sans Arabic",cursive;font-size:24px;color:var(--ink)}
+.award p{color:var(--muted);margin-top:8px;font-size:14.5px}
+
+/* ---------- welcome gate + anthem ---------- */
+.gate{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:20px;
+  background:radial-gradient(circle at 50% 35%,color-mix(in srgb,var(--brand) 20%,var(--page)),var(--page) 72%);
+  transition:opacity .5s ease,visibility .5s}
+.gate.off{opacity:0;visibility:hidden}
+.gate-card{text-align:center;max-width:460px;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:34px 26px 24px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.gate-card::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:var(--sa)}
+.gate-card img{width:92px;height:92px;border-radius:24px;display:block;margin:0 auto}
+.gate-card .kick{margin-top:16px;color:var(--sa);font-weight:600;font-size:14px}
+.gate-card h2{font-family:"Baloo Bhaijaan 2","IBM Plex Sans Arabic",cursive;font-size:clamp(25px,6vw,33px);color:var(--ink);margin-top:4px;line-height:1.45}
+.gate-card p{color:var(--muted);margin-top:8px}
+.gate-card .btn{margin-top:22px;font-size:17px;padding:14px 30px}
+.gate-card .skip{display:block;margin:14px auto 0;background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;font-size:13.5px}
+.sound{position:fixed;inset-inline-end:18px;bottom:18px;z-index:70;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:9px 16px;font-size:13.5px;font-weight:600;box-shadow:var(--shadow);cursor:pointer;display:flex;gap:8px;align-items:center}
+.sound .eq{display:inline-flex;gap:2px;align-items:flex-end;height:14px}
+.sound .eq i{width:3px;background:var(--sa);border-radius:2px;animation:eq .9s ease-in-out infinite}
+.sound .eq i:nth-child(2){animation-delay:.2s}.sound .eq i:nth-child(3){animation-delay:.4s}
+@keyframes eq{0%,100%{height:4px}50%{height:14px}}
+@media(prefers-reduced-motion:reduce){.sound .eq i{animation:none;height:10px}}
 </style>
 </head>
 <body>
@@ -264,11 +313,11 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
       </span>
     </a>
     <nav>
-      <a class="nl" href="#how">كيف يعمل</a>
-      <a class="nl" href="#packages">الباقات</a>
+      <a class="nl" href="#test">اختبار المستوى</a>
+      <a class="nl" href="#reviews">آراء الأهالي</a>
       <a class="nl" href="#trust">اعتماداتنا</a>
       <a class="nl" href="#contact">تواصل معنا</a>
-      <a class="btn" href="#test">ابدأ الاختبار</a>
+      <a class="btn" href="#calc">احسب ساعاتك</a>
     </nav>
   </div>
 </header>
@@ -278,23 +327,29 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 <div class="wrap">
   <section class="hero">
     <div>
-      <h1>نتيجتك في الاختبار هي خصمك.</h1>
-      <p class="lead">اختبار تقييمي قصير للتأسيس وجميع المراحل الدراسية، ولاختباري القدرات والتحصيلي. كل إجابة صحيحة ترفع خصمك على باقات الساعات، ويبدأ من ٥٪ ويصل إلى ٣٥٪.</p>
+      <h1>علّم أبناءك بقدر احتياجهم، وادفع بالساعة.</h1>
+      <p class="lead">احسب عدد الساعات التي يحتاجها ابنك أو ابنتك في كل مادة من مواد مرحلته الدراسية، واعرف التكلفة فوراً بسعر ساعة موحّد، دون باقات أو اشتراطات.</p>
       <div class="cta">
-        <a class="btn" href="#test">ابدأ اختبار التقييم</a>
-        <a class="btn ghost" href="#packages">شاهد الباقات وأسعارها</a>
+        <a class="btn" href="#calc">احسب ساعاتك الآن</a>
+        <a class="btn ghost" href="#test">اختبار تحديد المستوى</a>
       </div>
       <div class="trust">
-        <span><b>تأسيس</b> ومراحل وقدرات وتحصيلي</span>
-        <span><b>١٠</b> أسئلة فقط</span>
-        <span><b>١٠</b> دقائق</span>
+        <span><b>التأسيس</b> وكل المراحل والقدرات والتحصيلي</span>
+        <span><b>المركز الأول</b> في جائزة شركاء التنمية</span>
+        <span><b>مؤهّلة</b> من المركز الوطني للتعليم الإلكتروني</span>
       </div>
     </div>
 
-    <div class="ladder" aria-hidden="true">
-      <h3>سلّم الخصم</h3>
-      <div class="rows" id="ladder"></div>
-      <p class="note">الخصم يُطبَّق على سعر الباقة التي تختارها، ويظهر لك السعر قبل الخصم وبعده.</p>
+    <div class="price-card">
+      <span class="seal">سعر موحّد لكل المواد</span>
+      <div class="hp"><b id="hero-hp">٨٣</b><span>ريال سعودي للساعة</span></div>
+      <p>سعر الساعة محسوب من متوسط أسعار الساعة في جميع باقات فهيم بعد تطبيق كل نسب الخصم، فتحصل على أفضل سعر دون أن تختار باقة.</p>
+      <ul class="ticks">
+        <li>اختر المرحلة الدراسية</li>
+        <li>حدّد احتياج الطالب في كل مادة</li>
+        <li>اعرف عدد الساعات والتكلفة فوراً</li>
+      </ul>
+      <a class="btn" href="#calc">افتح حاسبة الساعات</a>
     </div>
   </section>
 </div>
@@ -303,32 +358,32 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   <div class="steps">
     <div class="step">
       <div class="n">١</div>
-      <h3>سجّل بياناتك</h3>
-      <p>الاسم ورقم الجوال ومرحلتك أو الاختبار الذي تستعد له، حتى نختار لك الأسئلة المناسبة.</p>
+      <h3>اختر المرحلة الدراسية</h3>
+      <p>تظهر لك جميع مواد المرحلة، من التأسيس حتى الثانوية، إضافة إلى القدرات والتحصيلي.</p>
     </div>
     <div class="step">
       <div class="n">٢</div>
-      <h3>أجب عن ١٠ أسئلة</h3>
-      <p>عشرة أسئلة من منهج صفّك، أو من أقسام القدرات والتحصيلي، خلال ١٠ دقائق.</p>
+      <h3>عبّئ احتياج كل مادة</h3>
+      <p>مدة الحصة بالدقائق، وعدد الحصص في الأسبوع، وعدد الأشهر، للمواد التي يحتاجها الطالب فقط.</p>
     </div>
     <div class="step">
       <div class="n">٣</div>
-      <h3>اختر باقتك بالسعر الجديد</h3>
-      <p>يُحتسب خصمك فوراً على كل الباقات، وتختار الباقة التي تناسبك.</p>
+      <h3>أرسل طلبك عبر واتساب</h3>
+      <p>تُحسب الساعات والتكلفة تلقائياً، ويصل ملخص طلبك لفريق فهيم بضغطة واحدة.</p>
     </div>
   </div>
 </div>
 
 <div class="wrap block" id="test">
-  <h2 class="sec-title">اختبار التقييم</h2>
-  <p class="sec-sub">اختبار مستوى للتأسيس وكل المراحل، إضافة إلى القدرات والتحصيلي، ويحدد خصمك. لا توجد إجابات خاطئة تُحتسب عليك، فقط كلما زادت إجاباتك الصحيحة زاد الخصم.</p>
+  <h2 class="sec-title">اختبار تحديد المستوى</h2>
+  <p class="sec-sub">اختبار مجاني قصير للتأسيس وكل المراحل وللقدرات والتحصيلي: ١٠ أسئلة في ١٠ دقائق، يوضّح مستوى الطالب في كل مادة ويساعدك على تقدير الساعات التي يحتاجها.</p>
 
   <div class="panel">
     <!-- ===== step 1: form ===== -->
     <div id="p-form">
       <div class="panel-head">
         <h2>بيانات الطالب</h2>
-        <p>نستخدم الجوال للتواصل معك وتفعيل الخصم على حسابك.</p>
+        <p>نستخدم الجوال للتواصل معك بخصوص نتيجة المستوى والحصص المناسبة.</p>
       </div>
       <div class="panel-body">
         <div class="grid2">
@@ -411,21 +466,21 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
     <!-- ===== step 3: result ===== -->
     <div id="p-result" class="hide">
       <div class="panel-head">
-        <h2>نتيجتك وخصمك</h2>
-        <p>الخصم مُفعّل الآن على جميع الباقات في الأسفل.</p>
+        <h2>نتيجة المستوى</h2>
+        <p>اخترنا مرحلة الطالب في حاسبة الساعات بالأسفل، لتعبّئ احتياجه مباشرة.</p>
       </div>
       <div class="panel-body">
         <div class="result">
           <div class="stamp">
-            <div class="big" id="disc">٣٥٪</div>
-            <div class="lbl">خصمك على الباقات</div>
+            <div class="big" id="disc">٠٪</div>
+            <div class="lbl">نسبة الإجابات الصحيحة</div>
           </div>
           <div>
             <h3 id="res-head">أحسنت</h3>
             <p class="score" id="res-score"></p>
             <div class="breakdown" id="res-chips"></div>
             <div class="exam-nav" style="justify-content:flex-start">
-              <a class="btn" href="#packages">اختر باقتك الآن</a>
+              <a class="btn" href="#calc">احسب الساعات لمرحلتك</a>
               <button class="btn ghost" id="retry">إعادة الاختبار</button>
             </div>
           </div>
@@ -435,36 +490,144 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   </div>
 </div>
 
-<div class="wrap block" id="packages">
-  <h2 class="sec-title">الباقات وأسعارها</h2>
-  <p class="sec-sub" id="pk-sub">هذه هي الأسعار الأساسية قبل الخصم. أكمل اختبار التقييم ليُطبَّق خصمك تلقائياً على كل باقة.</p>
+<div class="wrap block" id="calc">
+  <h2 class="sec-title">حاسبة الساعات</h2>
+  <p class="sec-sub">اختر المرحلة الدراسية فتظهر لك جميع موادها. عبّئ احتياج الطالب في المواد التي يحتاجها فقط، وتُحسب الساعات والتكلفة تلقائياً.</p>
 
-  <div class="pk-grid" id="pk-grid"></div>
-
-  <div class="summary" id="summary">
-    <h3 style="font-size:19px;color:var(--ink)">ملخص طلبك</h3>
-    <div class="rows" id="sum-rows"></div>
-    <div class="actions">
-      <a class="btn rose" id="wa" href="#" target="_blank" rel="noopener">تأكيد الطلب عبر واتساب</a>
-      <button class="btn ghost" id="copy">نسخ الملخص</button>
+  <div class="panel">
+    <div class="panel-head">
+      <div class="calc-head">
+        <div class="field">
+          <label for="stage">المرحلة الدراسية</label>
+          <select id="stage"></select>
+        </div>
+        <div class="hp-pill">سعر الساعة <b id="hp"></b></div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="calc-empty" id="calc-empty">اختر المرحلة الدراسية لتظهر لك جميع موادها.</div>
+      <div id="calc-table" class="hide">
+        <div class="crow chead" aria-hidden="true">
+          <span>المادة</span><span>مدة الحصة (دقيقة)</span><span>الحصص بالأسبوع</span><span>المدة (أشهر)</span><span>عدد الساعات</span><span>سعر الساعة</span><span>التكلفة</span>
+        </div>
+        <div id="calc-rows"></div>
+        <p class="calc-note">عدد الساعات = مدة الحصة × عدد الحصص في الأسبوع × ٤ أسابيع × عدد الأشهر. اترك المادة فارغة إن لم يحتجها الطالب.</p>
+      </div>
     </div>
   </div>
 
-  <details>
-    <summary>جدول الأسعار الكامل لكل نسب الخصم</summary>
-    <div class="tbl-scroll">
-      <table id="matrix">
-        <thead></thead>
-        <tbody></tbody>
-      </table>
+  <div class="summary" id="calc-sum">
+    <h3 style="font-size:19px;color:var(--ink)">ملخص احتياج الطالب</h3>
+    <div class="sum-lines" id="sum-lines"></div>
+    <div class="rows" id="sum-rows"></div>
+    <div class="actions">
+      <a class="btn rose" id="wa" href="#" target="_blank" rel="noopener">إرسال الطلب عبر واتساب</a>
+      <button class="btn ghost" id="copy">نسخ الملخص</button>
+      <button class="btn ghost" id="reset">مسح الجدول</button>
     </div>
-  </details>
+  </div>
 </div>
 
+<div class="wrap block" id="reviews">
+  <h2 class="sec-title">آراء أولياء الأمور</h2>
+  <p class="sec-sub">رسائل حقيقية وصلتنا من أولياء الأمور والطلاب بعد حصصهم مع معلمي فهيم.</p>
+
+  <div class="vid-feature">
+    <div class="vframe">
+      <video controls playsinline preload="none" poster="assets/student-story.jpg">
+        <source src="assets/student-story.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="vtext">
+      <span class="seal">قصة تفوّق</span>
+      <h3>«مشروع ثابر هو سبب تفوقي في دراستي من خلال منصة فهيم»</h3>
+      <p>أحد طلاب فهيم يحكي كيف ساعدته الحصص والمتابعة المستمرة على التفوّق في دراسته.</p>
+    </div>
+  </div>
+
+  <div class="vid-row">
+    <div class="vcard">
+      <div class="vframe tall">
+        <video controls playsinline preload="none" poster="assets/lesson-home-1.jpg">
+          <source src="assets/lesson-home-1.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="cap">حصة فهيم من البيت، مع الكتاب المدرسي والمعلم على الشاشة.</p>
+    </div>
+    <div class="vcard">
+      <div class="vframe tall">
+        <video controls playsinline preload="none" poster="assets/lesson-home-2.jpg">
+          <source src="assets/lesson-home-2.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="cap">درس تفاعلي مباشر على منصة فهيم.</p>
+    </div>
+    <div class="vcap-box">
+      <span class="big-stat">من ٨٤ إلى ٩٤</span>
+      <h3>ارتفاع حقيقي في النتائج</h3>
+      <p>هكذا وصفت إحدى الأمهات تقدّم ابنها في الترم الثاني بعد الدراسة مع فهيم. الحصص تُقام من البيت، في الوقت الذي يناسب الأسرة.</p>
+      <a class="btn" href="#calc">احسب احتياج ابنك</a>
+    </div>
+  </div>
+
+  <div class="quotes">
+    <figure class="qcard">
+      <div class="stars" aria-label="تقييم خمس نجوم">★★★★★</div>
+      <blockquote>نسبة ابني ارتفعت من ٨٤ إلى ٩٤ في الترم الثاني.</blockquote>
+      <figcaption>أم عمر، ولية أمر لطالبين في فهيم</figcaption>
+      <button class="shot-btn" data-zoom><img src="assets/feedback-1.jpg" loading="lazy" alt="رسالة أم عمر عن تجربة ابنها وابنتها مع منصة فهيم"></button>
+    </figure>
+    <figure class="qcard">
+      <div class="stars" aria-label="تقييم خمس نجوم">★★★★★</div>
+      <blockquote>تمنّيت إني كنت أعرفكم من زمان.</blockquote>
+      <figcaption>أم فهد، تشكر الأستاذ محمد الأمير</figcaption>
+      <button class="shot-btn" data-zoom><img src="assets/feedback-3.jpg" loading="lazy" alt="رسالة أم فهد تشكر الأستاذ محمد الأمير"></button>
+    </figure>
+    <figure class="qcard">
+      <div class="stars" aria-label="تقييم خمس نجوم">★★★★★</div>
+      <blockquote>من أفضل المنصات التعليمية اللي دخلتها.</blockquote>
+      <figcaption>ولي أمر، بعد تقييم المعلم لابنه</figcaption>
+      <button class="shot-btn" data-zoom><img src="assets/feedback-2.jpg" loading="lazy" alt="رسالة ولي أمر يصف فهيم بأنها من أفضل المنصات التعليمية"></button>
+    </figure>
+    <figure class="qcard">
+      <div class="stars" aria-label="تقييم خمس نجوم">★★★★★</div>
+      <blockquote>الأستاذة عسل، والحصة كانت ممتعة. ما حسّيت بالوقت أصلاً.</blockquote>
+      <figcaption>طالبة بعد حصتها الأولى</figcaption>
+      <button class="shot-btn" data-zoom><img src="assets/feedback-5.jpg" loading="lazy" alt="رسالة طالبة عن حصتها الممتعة مع الأستاذة"></button>
+    </figure>
+    <figure class="qcard">
+      <div class="stars" aria-label="تقييم خمس نجوم">★★★★★</div>
+      <blockquote>الأستاذ يفهّم ويشرح بكل وضوح.</blockquote>
+      <figcaption>طالب بعد انتهاء دورته</figcaption>
+      <button class="shot-btn" data-zoom><img src="assets/feedback-4.jpg" loading="lazy" alt="رسالة طالب يشكر المعلم على وضوح الشرح"></button>
+    </figure>
+    <figure class="qcard">
+      <div class="stars" aria-label="تقييم خمس نجوم">★★★★★</div>
+      <blockquote>شرح الأستاذة أسماء مرا جميل.</blockquote>
+      <figcaption>طالبة بعد الحصة التقييمية</figcaption>
+      <button class="shot-btn" data-zoom><img src="assets/feedback-6.jpg" loading="lazy" alt="رسالة طالبة عن شرح الأستاذة أسماء"></button>
+    </figure>
+    <figure class="qcard">
+      <div class="stars" aria-label="تقييم خمس نجوم">★★★★★</div>
+      <blockquote>كل شي تمام، وقبل الاختبار بأسبوع بآخذ مراجعة على اللي أخذته كله.</blockquote>
+      <figcaption>طالب في مرحلة التأسيس ويستعد للقدرات</figcaption>
+      <button class="shot-btn" data-zoom><img src="assets/feedback-7.jpg" loading="lazy" alt="محادثة مع طالب عن تقدمه في التأسيس واستعداده للقدرات"></button>
+    </figure>
+  </div>
+</div>
 
 <div class="wrap block" id="trust">
   <h2 class="sec-title">اعتماداتنا وسجلّنا</h2>
   <p class="sec-sub">منصة فهيم كيان تجاري سعودي مرخّص، ومؤهّلة من المركز الوطني للتعليم الإلكتروني كمقدّم خدمة دروس تعليمية.</p>
+
+  <div class="award">
+    <img id="award-img" src="assets/award.jpg" alt="تكريم منصة فهيم التعليمية بالمركز الأول في جائزة شركاء التنمية ضمن جائزة الملك خالد" loading="lazy">
+    <div>
+      <span class="seal">المركز الأول</span>
+      <h3>جائزة شركاء التنمية</h3>
+      <p>حصلت مبادرة «منصة فهيم التعليمية» على المركز الأول في جائزة شركاء التنمية، ضمن جائزة الملك خالد.</p>
+    </div>
+  </div>
 
   <div class="trust-grid">
     <div class="doc">
@@ -515,12 +678,13 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 
   <div class="faq">
     <h2 class="sec-title" style="margin-top:44px">الأسئلة الشائعة</h2>
-    <details><summary>كيف يتحدد الخصم؟</summary><p>بعدد إجاباتك الصحيحة في اختبار التقييم: ١٠ صحيحة تعني ٣٥٪، وتنخفض النسبة درجة واحدة مع كل إجابة ناقصة حتى ٥٪ كحد أدنى.</p></details>
-    <details><summary>هل يمكنني إعادة الاختبار؟</summary><p>نعم، من زر «إعادة الاختبار» في صفحة النتيجة، ويُعتمد آخر نتيجة تحصل عليها.</p></details>
-    <details><summary>على ماذا يُطبَّق الخصم؟</summary><p>على سعر الباقة التي تختارها من قائمة الباقات، ويظهر لك السعر قبل الخصم وبعده وقيمة التوفير وسعر الساعة.</p></details>
+    <details><summary>كيف حُدِّد سعر الساعة؟</summary><p>سعر الساعة ٨٣ ريالاً، وهو متوسط سعر الساعة في جميع باقات فهيم السابقة بعد تطبيق كل نسب الخصم عليها. بهذا يحصل الجميع على سعر عادل دون الحاجة لاختيار باقة.</p></details>
+    <details><summary>كيف تُحسب الساعات في الحاسبة؟</summary><p>مدة الحصة بالدقائق × عدد الحصص في الأسبوع × ٤ أسابيع × عدد الأشهر، لكل مادة على حدة، ثم تُجمع ساعات المواد كلها.</p></details>
+    <details><summary>هل يجب أن أعبّئ كل المواد؟</summary><p>لا، عبّئ فقط المواد التي يحتاجها الطالب. المادة الفارغة لا تدخل في الحساب.</p></details>
+    <details><summary>ما فائدة اختبار تحديد المستوى؟</summary><p>يعطيك صورة عن مستوى الطالب في كل مادة، فتعرف أين يحتاج ساعات أكثر. الاختبار مجاني ويمكن إعادته في أي وقت.</p></details>
     <details><summary>ما الفرق بين مسارات الاختبار؟</summary><p>التأسيس لمن هم قبل المدرسة والصفوف الأولى، ومسارات الصفوف تتبع المنهج السعودي، والقدرات والتحصيلي لطلاب المرحلة الثانوية المستعدين لاختبارات القياس.</p></details>
     <details><summary>هل المنصة معتمدة؟</summary><p>نعم، شركة فهيم التجارية منشأة سعودية بسجل تجاري نشط برقم ١٠١٠٥٩١٠٣١، ومؤهّلة من المركز الوطني للتعليم الإلكتروني كمقدّم خدمة دروس تعليمية.</p></details>
-    <details><summary>كيف أُكمل الاشتراك بعد اختيار الباقة؟</summary><p>اضغط «تأكيد الطلب عبر واتساب» ليصل الفريق ملخص طلبك كاملاً، ويتواصل معك لإتمام الاشتراك وجدولة الساعات.</p></details>
+    <details><summary>كيف أُكمل الاشتراك بعد حساب الساعات؟</summary><p>اضغط «إرسال الطلب عبر واتساب» ليصل الفريق ملخص احتياج الطالب كاملاً، ويتواصل معك لإتمام الاشتراك وجدولة الحصص.</p></details>
   </div>
 </div>
 
@@ -536,28 +700,42 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 <div class="lightbox" id="lightbox" role="dialog" aria-label="عرض الوثيقة"><img src="" alt="وثيقة جهة مؤهّلة"></div>
 <div class="toast" id="toast"></div>
 
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-t">
+  <div class="gate-card">
+    <img id="gate-logo" alt="" width="92" height="92">
+    <p class="kick">حيّاكم الله</p>
+    <h2 id="gate-t">أهلاً بكم في منصة فهيم التعليمية</h2>
+    <p>تعليم يناسب كل مرحلة، مع معلمين يشرحون بوضوح.</p>
+    <button class="btn" id="enter">ادخل إلى المنصة</button>
+    <button class="skip" id="enter-quiet">الدخول بدون صوت</button>
+  </div>
+</div>
+<audio id="anthem" preload="auto">
+  <source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/6/6d/Saudi_Arabian_national_anthem%2C_performed_by_the_United_States_Navy_Band.oga/Saudi_Arabian_national_anthem%2C_performed_by_the_United_States_Navy_Band.oga.mp3" type="audio/mpeg">
+  <source src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Saudi_Arabian_national_anthem%2C_performed_by_the_United_States_Navy_Band.oga" type="audio/ogg">
+</audio>
+<button class="sound hide" id="sound" type="button"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span>النشيد الوطني السعودي · إيقاف</span></button>
+
 <script>
 /* ============ الإعدادات ============ */
 var WHATSAPP = "966500127846"; // رقم واتساب منصة فهيم
 var EXAM_SECONDS = 10 * 60;
 
-/* ============ الباقات ============ */
-var PACKAGES = [
-  {name:"الانطلاقة", hours:4,   price:615},
-  {name:"الاختبارات",hours:8,   price:984},
-  {name:"المراجعة",  hours:12,  price:1329},
-  {name:"التميّز",   hours:15,  price:1636},
-  {name:"فهيم",      hours:20,  price:2153},
-  {name:"العلم",     hours:25,  price:2537},
-  {name:"النجاح",    hours:30,  price:2953},
-  {name:"الأوائل",   hours:35,  price:3323},
-  {name:"الفهم",     hours:50,  price:4615},
-  {name:"الموهبة",   hours:75,  price:6830},
-  {name:"نافس",      hours:100, price:8984},
-  {name:"التفوق",    hours:150, price:13415},
-  {name:"العائلة",   hours:200, price:17661}
+/* ============ سعر الساعة ============ */
+var HOUR_PRICE = 83; // متوسط سعر الساعة في جميع الباقات السابقة بعد تطبيق كل نسب الخصم (٨٣٫٠٨)
+var WEEKS_PER_MONTH = 4;
+
+/* ============ المراحل ومواد كل مرحلة ============ */
+var STAGES = [
+  {k:"f",  name:"التأسيس (ما قبل المدرسة والصفوف الأولى)", subjects:["القراءة والكتابة","الإملاء والخط","الرياضيات التأسيسية","اللغة الإنجليزية التأسيسية"]},
+  {k:"p1", name:"الابتدائية — الصفوف الأولية (١–٣)", subjects:["لغتي","الرياضيات","العلوم","اللغة الإنجليزية","الدراسات الإسلامية","القرآن الكريم"]},
+  {k:"p2", name:"الابتدائية — الصفوف العليا (٤–٦)", subjects:["لغتي","الرياضيات","العلوم","اللغة الإنجليزية","الدراسات الإسلامية","القرآن الكريم","الدراسات الاجتماعية","المهارات الرقمية"]},
+  {k:"m",  name:"المتوسطة", subjects:["لغتي الخالدة","الرياضيات","العلوم","اللغة الإنجليزية","الدراسات الإسلامية","القرآن الكريم","الدراسات الاجتماعية","المهارات الرقمية","التفكير الناقد"]},
+  {k:"h",  name:"الثانوية", subjects:["الرياضيات","الفيزياء","الكيمياء","الأحياء","اللغة الإنجليزية","الكفايات اللغوية","الدراسات الإسلامية","علم البيئة","علوم الأرض والفضاء","التقنية الرقمية","التفكير الناقد"]},
+  {k:"q",  name:"اختبار القدرات العامة", subjects:["القسم الكمي","القسم اللفظي"]},
+  {k:"t",  name:"الاختبار التحصيلي (علمي)", subjects:["الرياضيات","الفيزياء","الكيمياء","الأحياء"]}
 ];
-var TIERS = [5,10,15,20,25,30,35];
+var MINUTES = [30,45,60,90,120];
 
 /* ============ بنك الأسئلة ============ */
 var SUBJ = {
@@ -867,64 +1045,92 @@ var $ = function(s){return document.querySelector(s)};
 var AR = function(n){ return String(n).replace(/[0-9]/g, function(d){return "٠١٢٣٤٥٦٧٨٩"[+d]}); };
 var money = function(n){ return AR(Math.round(n).toLocaleString("en-US")) + " ر.س"; };
 function toast(msg){ var t=$("#toast"); t.textContent=msg; t.classList.add("on"); setTimeout(function(){t.classList.remove("on")},2200); }
-function finalPrice(base, d){ return Math.round(base * (1 - d/100)); }
+function num(v){ var x = String(v||"").replace(/[٠-٩]/g,function(d){return "٠١٢٣٤٥٦٧٨٩".indexOf(d)}).replace(/[^\d.]/g,""); var n = parseFloat(x); return isFinite(n) && n > 0 ? n : 0; }
+function hoursText(h){ return AR(String(Math.round(h*10)/10).replace(".","٫")); }
 
-var state = { student:null, level:null, gradeLabel:"", questions:[], answers:[], idx:0, discount:0, correct:0, pkg:null, left:EXAM_SECONDS, timerId:null };
+var state = { student:null, level:null, gradeLabel:"", questions:[], answers:[], idx:0, correct:0, pct:0, left:EXAM_SECONDS, timerId:null };
 
-/* ============ سلّم الخصم في الواجهة ============ */
+/* ============ حاسبة الساعات ============ */
+var calc = { stage:null, rows:[] };
+
 (function(){
-  var box = $("#ladder"), html = "";
-  TIERS.forEach(function(t,i){
-    html += '<div class="rung"><span>'+AR(t)+'٪</span><i style="width:'+(28+i*12)+'%;animation-delay:'+(i*70)+'ms"></i></div>';
-  });
-  box.innerHTML = html;
+  var html = '<option value="">اختر المرحلة الدراسية</option>';
+  STAGES.forEach(function(st){ html += '<option value="'+st.k+'">'+st.name+'</option>'; });
+  $("#stage").innerHTML = html;
+  $("#hp").textContent = money(HOUR_PRICE);
+  $("#hero-hp").textContent = AR(HOUR_PRICE);
 })();
 
-/* ============ الباقات ============ */
-function renderPackages(){
-  var g = $("#pk-grid"), d = state.discount, html = "";
-  PACKAGES.forEach(function(p,i){
-    var fp = d ? finalPrice(p.price, d) : p.price;
-    var perHour = Math.round(fp / p.hours);
-    html += '<button class="pk" data-i="'+i+'" aria-pressed="'+(state.pkg===i)+'">'+
-      '<span class="name">'+p.name+'</span>'+
-      '<span class="hrs">'+AR(p.hours)+' ساعة تعليمية</span>'+
-      (d ? '<span class="base off">'+money(p.price)+'</span>' : '<span class="base">السعر الأساسي</span>')+
-      '<span class="final">'+money(fp)+'</span>'+
-      (d ? '<span class="save">وفّرت '+money(p.price-fp)+'</span>' : '')+
-      '<span class="ph">'+money(perHour)+' للساعة</span>'+
-    '</button>';
+function stageOf(k){ for(var i=0;i<STAGES.length;i++){ if(STAGES[i].k===k) return STAGES[i]; } return null; }
+
+function setStage(k){
+  $("#stage").value = k;
+  var st = stageOf(k);
+  calc.stage = st;
+  $("#calc-empty").classList.toggle("hide", !!st);
+  $("#calc-table").classList.toggle("hide", !st);
+  if(!st){ calc.rows = []; $("#calc-rows").innerHTML = ""; updateCalc(); return; }
+  calc.rows = st.subjects.map(function(name){ return {name:name, min:60, per:0, months:0}; });
+  var html = "";
+  calc.rows.forEach(function(r,i){
+    var opts = MINUTES.map(function(m){ return '<option value="'+m+'"'+(m===r.min?" selected":"")+'>'+AR(m)+'</option>'; }).join("");
+    html += '<div class="crow" data-i="'+i+'">'+
+      '<span class="cname">'+r.name+'</span>'+
+      '<label class="cell"><span class="ml">الحصة (دقيقة)</span><select data-k="min" aria-label="مدة الحصة لمادة '+r.name+'">'+opts+'</select></label>'+
+      '<label class="cell"><span class="ml">حصص/أسبوع</span><input data-k="per" type="text" inputmode="numeric" placeholder="٠" aria-label="عدد الحصص في الأسبوع لمادة '+r.name+'"></label>'+
+      '<label class="cell"><span class="ml">المدة (أشهر)</span><input data-k="months" type="text" inputmode="decimal" placeholder="٠" aria-label="عدد الأشهر لمادة '+r.name+'"></label>'+
+      '<span class="cell out"><span class="ml">الساعات</span><b class="dim" data-o="hrs">—</b></span>'+
+      '<span class="cell out"><span class="ml">سعر الساعة</span><b>'+money(HOUR_PRICE)+'</b></span>'+
+      '<span class="cell out"><span class="ml">التكلفة</span><b class="dim" data-o="cost">—</b></span>'+
+    '</div>';
   });
-  g.innerHTML = html;
-  Array.prototype.forEach.call(g.querySelectorAll(".pk"), function(b){
-    b.addEventListener("click", function(){ selectPackage(+b.dataset.i); });
-  });
-  $("#pk-sub").textContent = d
-    ? "خصمك "+AR(d)+"٪ مُطبَّق على جميع الباقات. السعر قبل الخصم مشطوب، والسعر النهائي أسفله."
-    : "هذه هي الأسعار الأساسية قبل الخصم. أكمل اختبار التقييم ليُطبَّق خصمك تلقائياً على كل باقة.";
+  $("#calc-rows").innerHTML = html;
+  updateCalc();
 }
 
-function selectPackage(i){
-  state.pkg = i;
-  renderPackages();
-  var p = PACKAGES[i], d = state.discount, fp = d ? finalPrice(p.price,d) : p.price;
+function rowHours(r){ return r.min/60 * r.per * WEEKS_PER_MONTH * r.months; }
+
+function updateCalc(){
+  var total = 0, lines = "";
+  Array.prototype.forEach.call(document.querySelectorAll("#calc-rows .crow"), function(el){
+    var r = calc.rows[+el.dataset.i], h = rowHours(r);
+    var hb = el.querySelector('[data-o="hrs"]'), cb = el.querySelector('[data-o="cost"]');
+    el.classList.toggle("on", h > 0);
+    hb.textContent = h > 0 ? hoursText(h) + " ساعة" : "—";
+    cb.textContent = h > 0 ? money(h * HOUR_PRICE) : "—";
+    hb.classList.toggle("dim", !(h > 0)); cb.classList.toggle("dim", !(h > 0));
+    if(h > 0){
+      total += h;
+      lines += '<div><span>'+r.name+'</span><span>'+hoursText(h)+' ساعة · '+money(h*HOUR_PRICE)+'</span></div>';
+    }
+  });
+  var on = total > 0;
+  $("#calc-sum").classList.toggle("on", on);
+  if(!on) return;
+  $("#sum-lines").innerHTML = lines;
   var rows = "";
   function row(k,v,cls){ rows += '<div class="row '+(cls||"")+'"><span>'+k+'</span><span class="v">'+v+'</span></div>'; }
-  if(state.student){ row("الطالب", state.student.name); row("المرحلة", state.gradeLabel); }
-  row("الباقة", p.name + " — " + AR(p.hours) + " ساعة");
-  row("السعر الأساسي قبل الخصم", money(p.price));
-  row("نسبة الخصم", d ? AR(d)+"٪" : "لم يُحتسب بعد");
-  if(d) row("قيمة التوفير", money(p.price - fp));
-  row("سعر الساعة بعد الخصم", money(Math.round(fp/p.hours)));
-  row("السعر النهائي", money(fp), "total");
+  if(state.student) row("الطالب", state.student.name);
+  row("المرحلة الدراسية", calc.stage.name);
+  row("إجمالي الساعات", hoursText(total) + " ساعة");
+  row("سعر الساعة", money(HOUR_PRICE));
+  row("التكلفة الإجمالية", money(total * HOUR_PRICE), "total");
   $("#sum-rows").innerHTML = rows;
-  $("#summary").classList.add("on");
-
-  var txt = summaryText(p, fp, d);
-  $("#wa").href = "https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(txt);
-  $("#summary").scrollIntoView({behavior:"smooth", block:"center"});
-  if(!d) toast("أكمل الاختبار لتفعيل الخصم على هذه الباقة");
+  $("#wa").href = "https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(calcText());
 }
+
+$("#stage").addEventListener("change", function(){ setStage(this.value); });
+$("#calc-rows").addEventListener("input", function(e){
+  var el = e.target.closest(".crow"), k = e.target.dataset.k;
+  if(!el || !k) return;
+  calc.rows[+el.dataset.i][k] = num(e.target.value);
+  updateCalc();
+});
+$("#calc-rows").addEventListener("change", function(e){
+  var el = e.target.closest(".crow");
+  if(el && e.target.dataset.k === "min"){ calc.rows[+el.dataset.i].min = num(e.target.value); updateCalc(); }
+});
+$("#reset").addEventListener("click", function(){ if(calc.stage) setStage(calc.stage.k); toast("تم مسح الجدول"); });
 
 function orderRef(){
   if(!state.ref){
@@ -935,53 +1141,41 @@ function orderRef(){
   }
   return state.ref;
 }
-function summaryText(p, fp, d){
-  var s = state.student || {};
+function calcText(){
+  var s = state.student || {}, total = 0;
+  var fmt = function(n){ return String(Math.round(n*10)/10); };
   var when = new Date().toLocaleDateString("ar-SA-u-ca-gregory", {year:"numeric", month:"2-digit", day:"2-digit"});
   var L = [];
-  L.push("🧾 فاتورة مبدئية — منصة فهيم");
+  L.push("🧮 طلب ساعات تعليمية — منصة فهيم");
   L.push("رقم الطلب: " + orderRef());
   L.push("التاريخ: " + when);
   L.push("──────────────");
-  L.push("الاسم: " + (s.name || "-"));
-  L.push("الجوال: " + (s.phone || "-"));
-  L.push("المرحلة / الاختبار: " + (state.gradeLabel || "-"));
-  if(s.city) L.push("المدينة: " + s.city);
+  if(s.name) L.push("الاسم: " + s.name);
+  if(s.phone) L.push("الجوال: " + s.phone);
+  L.push("المرحلة الدراسية: " + calc.stage.name);
+  if(state.questions.length && state.pct) L.push("نتيجة اختبار المستوى: " + state.correct + " من " + state.questions.length);
   L.push("──────────────");
-  L.push("نتيجة اختبار التقييم: " + (state.questions.length ? state.correct + " من " + state.questions.length : "لم يُجرَ بعد"));
-  L.push("الخصم المستحق: " + (d ? d + "%" : "بدون خصم"));
+  calc.rows.forEach(function(r){
+    var h = rowHours(r);
+    if(h > 0){
+      total += h;
+      L.push("• " + r.name + ": " + r.min + " دقيقة × " + r.per + " حصص أسبوعياً × " + fmt(r.months) + " شهر = " + fmt(h) + " ساعة");
+    }
+  });
   L.push("──────────────");
-  L.push("الباقة: " + p.name + " — " + p.hours + " ساعة");
-  L.push("السعر قبل الخصم: " + p.price.toLocaleString("en-US") + " ر.س");
-  if(d) L.push("قيمة الخصم: " + (p.price - fp).toLocaleString("en-US") + " ر.س");
-  L.push("سعر الساعة بعد الخصم: " + Math.round(fp/p.hours).toLocaleString("en-US") + " ر.س");
-  L.push("الإجمالي النهائي: " + fp.toLocaleString("en-US") + " ر.س");
+  L.push("إجمالي الساعات: " + fmt(total) + " ساعة");
+  L.push("سعر الساعة: " + HOUR_PRICE + " ر.س");
+  L.push("التكلفة الإجمالية: " + Math.round(total * HOUR_PRICE).toLocaleString("en-US") + " ر.س");
   L.push("──────────────");
-  L.push("أرغب في تأكيد الاشتراك بهذه الباقة.");
+  L.push("أرغب في الاشتراك وجدولة الحصص.");
   return L.join("\n");
 }
 
 $("#copy").addEventListener("click", function(){
-  var p = PACKAGES[state.pkg], fp = state.discount ? finalPrice(p.price, state.discount) : p.price;
-  var txt = summaryText(p, fp, state.discount);
+  var txt = calcText();
   if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(function(){toast("تم نسخ الملخص")}, function(){toast("تعذّر النسخ، انسخه يدوياً")}); }
   else toast("تعذّر النسخ على هذا المتصفح");
 });
-
-/* ============ جدول الأسعار الكامل ============ */
-(function(){
-  var t = $("#matrix"), head = "<tr><th>الباقة</th><th>الساعات</th><th>قبل الخصم</th>";
-  TIERS.forEach(function(d){ head += "<th>"+AR(d)+"٪</th>"; });
-  head += "</tr>";
-  t.querySelector("thead").innerHTML = head;
-  var body = "";
-  PACKAGES.forEach(function(p){
-    body += "<tr><td>"+p.name+"</td><td>"+AR(p.hours)+"</td><td>"+AR(p.price.toLocaleString("en-US"))+"</td>";
-    TIERS.forEach(function(d){ body += "<td>"+AR(finalPrice(p.price,d).toLocaleString("en-US"))+"</td>"; });
-    body += "</tr>";
-  });
-  t.querySelector("tbody").innerHTML = body;
-})();
 
 /* ============ النموذج ============ */
 function normPhone(v){
@@ -1093,15 +1287,15 @@ function finishExam(timeUp){
   var c = 0;
   state.questions.forEach(function(q,i){ if(state.answers[i] === q.a) c++; });
   state.correct = c;
-  state.discount = c >= 10 ? 35 : c === 9 ? 30 : c === 8 ? 25 : c === 7 ? 20 : c === 6 ? 15 : c === 5 ? 10 : 5;
+  state.pct = Math.round(c / state.questions.length * 100);
 
   $("#p-exam").classList.add("hide");
   $("#p-result").classList.remove("hide");
-  $("#disc").textContent = AR(state.discount)+"٪";
-  var head = state.discount >= 30 ? "مستوى ممتاز" : state.discount >= 20 ? "مستوى جيد جداً" : state.discount >= 10 ? "مستوى جيد" : "بداية الطريق";
+  $("#disc").textContent = AR(state.pct)+"٪";
+  var head = state.pct >= 90 ? "مستوى ممتاز" : state.pct >= 70 ? "مستوى جيد جداً" : state.pct >= 50 ? "مستوى جيد" : "بداية الطريق";
   $("#res-head").textContent = head + "، " + state.student.name.split(" ")[0];
   $("#res-score").textContent = (timeUp ? "انتهى الوقت. " : "") +
-    "إجاباتك الصحيحة " + AR(c) + " من " + AR(state.questions.length) + "، ويقابلها خصم " + AR(state.discount) + "٪ على أي باقة تختارها.";
+    "إجاباتك الصحيحة " + AR(c) + " من " + AR(state.questions.length) + ". خصّص ساعات أكثر للمواد الأقل نتيجة عند تعبئة حاسبة الساعات.";
 
   var by = {};
   state.questions.forEach(function(q,i){
@@ -1112,8 +1306,8 @@ function finishExam(timeUp){
   Object.keys(by).forEach(function(k){ chips += '<span class="chip">'+k+' <b>'+AR(by[k].c)+'/'+AR(by[k].t)+'</b></span>'; });
   $("#res-chips").innerHTML = chips;
 
-  renderPackages();
-  if(state.pkg !== null) selectPackage(state.pkg);
+  if(stageOf(state.level) && (!calc.stage || calc.stage.k !== state.level)) setStage(state.level);
+  else updateCalc();
   $("#test").scrollIntoView({behavior:"smooth", block:"start"});
   saveLead("finished");
 }
@@ -1138,24 +1332,52 @@ async function saveLead(stage){
     await DB.doc("leads/" + state._leadId).set({
       name: state.student.name, phone: state.student.phone, city: state.student.city,
       grade: state.gradeLabel, stage: stage,
-      score: state.correct, discount: state.discount,
+      score: state.correct, percent: state.pct,
       createdAt: new Date().toISOString()
     });
   }catch(e){ /* الزائر بدون صلاحية كتابة — نكمل عادي */ }
 }
 
-/* تكبير وثيقة الاعتماد */
+/* تكبير الصور */
 (function(){
-  var lb = $("#lightbox"), img = $("#cert-img");
-  if(!img) return;
-  img.addEventListener("click", function(){ lb.querySelector("img").src = img.src; lb.classList.add("on"); });
+  var lb = $("#lightbox"), big = lb.querySelector("img");
+  function open(img){ big.src = img.src; big.alt = img.alt; lb.classList.add("on"); }
+  ["#cert-img","#award-img"].forEach(function(s){ var img = $(s); if(img) img.addEventListener("click", function(){ open(img); }); });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-zoom]"), function(b){
+    b.addEventListener("click", function(){ open(b.querySelector("img")); });
+  });
   lb.addEventListener("click", function(){ lb.classList.remove("on"); });
   document.addEventListener("keydown", function(e){ if(e.key === "Escape") lb.classList.remove("on"); });
 })();
 
-$("#wa2").href = "https://wa.me/" + WHATSAPP;
+/* شاشة الترحيب والنشيد الوطني */
+(function(){
+  var gate = $("#gate"), audio = $("#anthem"), btn = $("#sound");
+  $("#gate-logo").src = document.querySelector(".logo img").src;
+  var seen = false;
+  try{ seen = sessionStorage.getItem("faheem-entered") === "1"; }catch(e){}
+  if(seen){ gate.classList.add("off"); }
+  else { document.body.style.overflow = "hidden"; $("#enter").focus(); }
+  function enter(withSound){
+    try{ sessionStorage.setItem("faheem-entered","1"); }catch(e){}
+    gate.classList.add("off");
+    document.body.style.overflow = "";
+    if(withSound){
+      audio.currentTime = 0;
+      var p = audio.play();
+      if(p && p.catch) p.catch(function(){ toast("تعذّر تشغيل النشيد على هذا المتصفح"); });
+    }
+  }
+  $("#enter").addEventListener("click", function(){ enter(true); });
+  $("#enter-quiet").addEventListener("click", function(){ enter(false); });
+  audio.addEventListener("play", function(){ btn.classList.remove("hide"); });
+  audio.addEventListener("pause", function(){ btn.classList.add("hide"); });
+  audio.addEventListener("ended", function(){ btn.classList.add("hide"); });
+  btn.addEventListener("click", function(){ audio.pause(); });
+  document.addEventListener("play", function(e){ if(e.target.tagName === "VIDEO") audio.pause(); }, true);
+})();
 
-renderPackages();
+$("#wa2").href = "https://wa.me/" + WHATSAPP;
 </script>
 </body>
 </html>
