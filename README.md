@@ -50,14 +50,26 @@ there is no server-side code.
 Values live at the top of the `<script>` block in `index.html`:
 
 - `WHATSAPP` — WhatsApp number that receives order summaries (currently `966500127846`).
-- `EXAM_SECONDS` — quiz time limit (currently 10 minutes).
-- `HOUR_PRICE` — the calculator's price per hour: **83 SAR**. It is the average price per hour
-  across all 13 former packages (4–200 hours) under every former discount tier (5–35%),
-  which comes to 83.08. The packages themselves were removed from the site.
+- `HOUR_PRICE` — the base price per hour: **83 SAR** (the average per-hour price of the 13
+  former packages under all 7 former discount tiers, 83.08). The packages were removed.
+- `TIERS` — the quiz discount on the hour price: 10 correct → 35%, 9 → 30%, 8 → 25%,
+  7 → 20%, 6 → 15%, 5 → 10%, below that → 5%. The calculator, hero card and WhatsApp
+  summary all use the discounted price once the quiz is done.
+- `EXAM_SECONDS` — 5 minutes. The quiz can be taken **once**: progress and the result are
+  kept in `localStorage` (`faheem-exam`), so a reload resumes the exam against the same
+  deadline, or shows the saved result. Clearing site data is the only way round it.
 - `WEEKS_PER_MONTH` — 4. Hours per subject = minutes ÷ 60 × sessions per week × 4 × months.
 - `STAGES` — each school stage and its subjects, shown in the calculator.
 - `BANK` — the quiz question bank, grouped by track (`p1`, `p2`, `m`, `h`, `f`, `q`, `t`).
-  The quiz now reports a level only; it no longer grants a discount.
+
+### مساعد فهيم (the assistant)
+
+A floating chat that answers parents from `KB` in the page script — no server and no AI
+model, so it only knows what is written there. Each entry has `keys` (Arabic keywords,
+matched after normalising hamza, taa marbuta, alef maqsura and diacritics), an answer, and
+follow-up suggestions. A question that matches nothing is handed to the team on WhatsApp
+with the question pre-filled. To teach it something new, add an entry to `KB` and a label
+to `CHIP_LABELS` if it should appear as a suggestion.
 
 The anthem is the US Navy Band recording on Wikimedia Commons (public domain), linked
 directly rather than committed. Browsers block audio until the visitor interacts, so it
