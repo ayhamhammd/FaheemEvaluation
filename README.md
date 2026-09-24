@@ -85,6 +85,10 @@ per browser tab session.
 
 ## Notes
 
+- Link previews (WhatsApp, X, iMessage) use the Open Graph tags in `<head>`, which point at
+  `https://faheemevaluation.onrender.com/assets/og-logo.jpg`. They need an absolute URL, so
+  if the site moves to another domain, update `og:url` and the three image tags with it.
+
 - Lead capture (`saveLead`) only writes when a `claude.use("db")` runtime is
   present; on Render it is a no-op and the page works normally.
 - Google Fonts are loaded from the CDN; everything else is inlined.
